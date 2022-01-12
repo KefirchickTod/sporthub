@@ -70,6 +70,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     bcrypt (3.1.16)
+    bcrypt (3.1.16-java)
     bindex (0.8.1)
     bootsnap (1.9.4)
       msgpack (~> 1.0)
@@ -91,6 +92,7 @@ GEM
       reline (>= 0.2.7)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    digest (3.1.0-java)
     erubi (1.10.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
@@ -120,6 +122,7 @@ GEM
     mini_portile2 (2.7.1)
     minitest (5.15.0)
     msgpack (1.4.2)
+    msgpack (1.4.2-java)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -136,10 +139,15 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
+    nio4r (2.5.8-java)
     nokogiri (1.13.0)
       mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
-    nokogiri (1.13.0-x86_64-linux)
+    nokogiri (1.13.0-java)
+      racc (~> 1.4)
+    nokogiri (1.13.0-x64-mingw32)
+      racc (~> 1.4)
+    nokogiri (1.13.0-x86-mingw32)
       racc (~> 1.4)
     parallel (1.21.0)
     parser (3.1.0.0)
@@ -147,7 +155,10 @@ GEM
     public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
+    puma (5.5.2-java)
+      nio4r (~> 2.0)
     racc (1.6.0)
+    racc (1.6.0-java)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -235,6 +246,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2021.5)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
@@ -247,14 +260,19 @@ GEM
       selenium-webdriver (~> 4.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
+    websocket-driver (0.7.5-java)
+      websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.5.3)
 
 PLATFORMS
+  java
   ruby
-  x86_64-linux
+  x64-mingw32
+  x86-mingw32
+  x86-mswin32
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
@@ -281,4 +299,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.3.4
+   2.1.4
