@@ -71,7 +71,7 @@ GEM
     ast (2.4.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.9.3)
+    bootsnap (1.9.4)
       msgpack (~> 1.0)
     builder (3.2.4)
     capybara (3.36.0)
@@ -98,9 +98,8 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.0.1)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
+    importmap-rails (0.7.6)
+      rails (>= 6.0.0)
     io-console (0.5.11)
     io-wait (0.2.1)
     irb (1.4.1)
@@ -117,6 +116,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.7.1)
     minitest (5.15.0)
     msgpack (1.4.2)
     net-imap (0.2.3)
@@ -135,7 +135,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.0-x86_64-linux)
+    nokogiri (1.13.0)
+      mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
     parallel (1.21.0)
     parser (3.1.0.0)
@@ -231,7 +232,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    unicode-display_width (1.7.0)
+    unicode-display_width (2.1.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -273,7 +274,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 2.7.0p0
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   2.1.4
+   2.2.22
