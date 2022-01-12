@@ -57,6 +57,10 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
+  # RuboCop is a Ruby static code analyzer (a.k.a. linter) and code formatter. [https://github.com/rubocop/rubocop]
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop', require: false
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
