@@ -13,8 +13,8 @@ class CreateArticles < ActiveRecord::Migration[7.0]
       t.timestamps
 
       # Relationship
-      belongs_to :category, index: true, foreign_key: true
-      belongs_to :user, index: true, foreign_key: true
+      t.references :categories, index: true, foreign_key: true
+      t.references :users, index: true, foreign_key: true
 
     end
   end
