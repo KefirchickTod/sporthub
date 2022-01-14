@@ -1,5 +1,6 @@
 # Before seed delete all notes
-Category.delete_all
+#Category.delete_all
+#ActiveRecord::Base.connection.execute("TRUNCATE categories RESTART IDENTITY")
 
 # Create a 10 categories
 10.times do |i|

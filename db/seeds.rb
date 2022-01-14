@@ -7,17 +7,36 @@ require "faker"
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Dir[File.join(Rails.root, "db", "seeders", "*.rb")].sort.each do |seed|
 
-  puts "Star seeding #{seed}"
+ROOT = "#{Rails.root}/db/seeders/"
+DIRS = [
+ 'users',
+ 'categories',
+ 'article',
+ 'comments'
+].map { |x| "#{ROOT}#{x}.seed.rb" }
 
 
-  begin
+# Main fn for run seed
+def run
+  DIRS.each do |seed|
+    puts "Star seeding #{seed}"
+
     load seed
-  rescue
-    puts "Some error with seeding #{seed}"
+
+    sleep 0.2
   end
-
-  sleep 0.2
-
 end
+
+
+begin
+  run
+rescue => e
+  puts "Error with seed: #{e.to_s}"
+  #system("rails db:truncate_all")
+rescue
+  puts "Get error"
+  #system("rails db:truncate_all")
+end
+
+

@@ -1,5 +1,6 @@
 # Delete all prev note
-Comment.delete_all
+#Comment.delete_all
+#ActiveRecord::Base.connection.execute("TRUNCATE comments RESTART IDENTITY")
 
 raise 'Cant create seed for comment if empty users' if User.all.empty?
 raise 'Cant create seed for comment if empty articles' if Article.all.empty?
