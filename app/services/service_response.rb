@@ -2,9 +2,9 @@ class ServiceResponse
   attr_accessor :status, :data, :error
 
   def initialize(status, data: nil, error: nil)
-    @status     = status
-    @data       = data
-    @error_code = error
+    @status = status
+    @data = data
+    @error = error
   end
 
   # Check if is status ok
@@ -23,7 +23,7 @@ class ServiceResponse
   # @return[String]
   def error_massage
     # TODO[check]: if error is object convert it to string
-    error.to_s
+    @error.to_s
   end
 
 end
