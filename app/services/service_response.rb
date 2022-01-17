@@ -1,4 +1,4 @@
-class Service::Response
+class ServiceResponse
   attr_accessor :status, :data, :error
 
   def initialize(status, data: nil, error: nil)

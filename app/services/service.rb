@@ -1,26 +1,31 @@
 class Service
 
-
-  # @return[Service::Response]
+  # Basic method for run
+  # @return[ServiceResponse]
   def run
-    result = run
+    result = call
     success(result)
   rescue => e
-    error(error: e.to_s)
+    error(error: e)
+  end
+
+  # Interface methods
+  def call
+    raise "This method is not implemented"
   end
 
   protected
 
   # Get special class for manipulate response after services
-  # @return[Service::Response]
+  # @return[ServiceResponse]
   def success(data = nil)
-    Service::Response.new(true, data: data)
+    ServiceResponse.new(true, data: data)
   end
 
   # Get error response
-  # @return[Service::Response]
+  # @return[ServiceResponse]
   def error(data = nil, error: nil)
-    Service::Response.new(false, data: data, error: error)
+    ServiceResponse.new(false, data: data, error: error)
   end
 
 end

@@ -1,6 +1,6 @@
-module Authentication
+module Users::Authentication
   # Register
-  class Register
+  class Register < Service
 
     class BadRegisterParam < ArgumentError
     end
@@ -11,8 +11,11 @@ module Authentication
     end
 
     def call
-      @user          = create_user
-      session[:user] = @user.id
+      @user = create_user
+
+      if defined?(session)
+        session[:user] = @user.id
+      end
 
       @user
     end
@@ -36,6 +39,5 @@ module Authentication
       p.require(:user).permit(:email, :password, :password_confirmation, :first_name)
     end
   end
-
 
 end
