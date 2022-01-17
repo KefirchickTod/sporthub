@@ -22,7 +22,8 @@ rails db:create
 rails db:migrate
 rails db:seed
 ```
-- if u have error with db try delete regenerate master.key  and credentials.yml.enc
+
+- if u have error with db try delete regenerate master.key and credentials.yml.enc
 
 
 - run server
@@ -31,11 +32,17 @@ rails db:seed
 rails s 
 ```
 
-
 - for build scss use
+
 ```bash
 npm run-script build:css
 ```
+
+# Additional
+
+For create db diagrams use [DbSchema](https://dbschema.com/download.html)
+
+For each migration(table) need create a seed
 
 # Version
 
