@@ -1,24 +1,46 @@
-# README
+# Installation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- install [rbenv](https://github.com/rbenv/rbenv)
 
-Things you may want to cover:
+```bash
+sudo apt install rbenv
+rbenv init
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+```
 
-* Ruby version
+- install current version and run:
 
-* System dependencies
+```bash
+bundle install
+npm i  
+```
 
-* Configuration
+- config your database environment in file config/database.yml and create db in conlse
 
-* Database creation
+```bash
+rails db:create
+rails db:migrate
+rails db:seed
+```
+- if u have error with db try delete regenerate master.key  and credentials.yml.enc
 
-* Database initialization
 
-* How to run the test suite
+- run server
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+rails s 
+```
 
-* Deployment instructions
 
-* ...
+- for build scss use
+```bash
+npm run-script build:css
+```
+
+# Version
+
+- ruby 2.7.0
+- rails 7.0.1
+- bundle 2.1.4
+- gem 3.1.2
+
