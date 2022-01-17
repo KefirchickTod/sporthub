@@ -16,7 +16,7 @@
 <nav class="nav">
 
     <div class="nav-item-1">
-        <h1 class=" logo"> <a style="color:white; text-decoration:none" href="/">Sport hub</a></h1>
+        <h1 class=" logo"><a style="color:white; text-decoration:none" href="/">Sport hub</a></h1>
     </div>
 
     <div class="nav-item-2">
@@ -64,9 +64,10 @@
             <li class="btn btn-outline"><a style="color:red; text-decoration:none" href="#">Log in</a></li>
             <li class="dropdown">
                 <button class="drop-btn">EN
-                    <i><svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.50244 6L0.739302 0L10.2656 0L5.50244 6Z" fill="black"></path>
-                    </svg>
+                    <i>
+                        <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.50244 6L0.739302 0L10.2656 0L5.50244 6Z" fill="black"></path>
+                        </svg>
                     </i>
                 </button>
                 <div class="dropdown-content">
@@ -92,6 +93,8 @@
         </span>
     </div>
 <% end %>
-<%= yield %>
+<div id="<%= controller_name %>">
+    <%= yield %>
+</div>
 </body>
 </html>

@@ -15,8 +15,8 @@
  */
 
 @import 'vendor/bootstrap';
-@import './layout/header';
-
+@import 'sass-utils/variables';
+@import 'layout/header';
 
 
 .gradient-custom {
