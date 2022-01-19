@@ -4,6 +4,7 @@ class Users::Authentication::Register < Service
 
   def initialize(params)
     @params = validates(params)
+    @confirmation = Users::Authentication::Confirmation.new(params)
   end
 
   def call
@@ -13,20 +14,37 @@ class Users::Authentication::Register < Service
       session[:user] = @user.id
     end
 
+    send_confirmation
+
     @user
   end
 
   private
 
+  # Send confirmation to email
+  def send_confirmation
+    @confirmation.call
+  end
+
   # Create new users
   # @return[User]
   # @raise [BadRegisterParam]
   def create_user
-    user = User.new(@params)
+    user = user!
 
-    raise BadRegisterParam.new("Cant create user, bad params") unless user.save
+    unless user.save
+      massage = user.errors.messages
 
+      raise BadRegisterParam.new("Cant create user, errors: #{massage}")
+
+    end
     user
+  end
+
+  def user!
+    raise "Email already exists" if User.find_by(email: @params[:email]).present?
+
+    User.new(@params)
   end
 
   # Validate input params from request

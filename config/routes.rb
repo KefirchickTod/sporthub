@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   root "home#index"
 
   resource :user, only: %i[create new]
+
+  resources :confirmations, only: %i[create edit new], param: :confirmation_token
+  resources :sessions, only: %i[create new]
+  get "logout", to: "sessions#destroy"
 end

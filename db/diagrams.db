@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="sporthub" id="Project-11f2" database="PostgreSQL" >
+	<comment><![CDATA[Softserver demo project from ruby retrening]]></comment>
+	<schema name="sporthub" >
+		<table name="articles" prior="tbl" >
+			<comment><![CDATA[All article in site]]></comment>
+			<column name="id" type="bigserial" jt="-5" mandatory="y" >
+				<defo><![CDATA[nextval('articles_id_seq'::regclass)]]></defo>
+			</column>
+			<column name="title" type="varchar" length="255" jt="12" mandatory="y" >
+				<comment><![CDATA[Main article title]]></comment>
+			</column>
+			<column name="categories_id" prior="article_categories_id" type="bigserial" jt="-5" mandatory="y" >
+				<comment><![CDATA[Category  for article]]></comment>
+			</column>
+			<column name="short_text" type="varchar" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Short description article]]></comment>
+			</column>
+			<column name="full_text" type="text" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Full content in article]]></comment>
+			</column>
+			<column name="is_public" type="smallint" jt="5" >
+				<defo><![CDATA[1]]></defo>
+				<comment><![CDATA[Check if show article in site]]></comment>
+			</column>
+			<column name="author_id" type="bigserial" jt="-5" mandatory="y" />
+			<column name="default_photo" type="varchar" length="255" jt="12" mandatory="y" >
+				<comment><![CDATA[Main photo]]></comment>
+			</column>
+			<column name="created_at" type="date" jt="91" mandatory="y" />
+			<column name="updated_at" type="date" jt="91" />
+			<index name="pk_articles_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_articles_search" unique="NORMAL" >
+				<comment><![CDATA[Columns for search article by titlt or short description]]></comment>
+				<column name="title" />
+				<column name="short_text" />
+			</index>
+			<fk name="fk_articles_authors" to_schema="sporthub" to_table="users" >
+				<fk_column name="author_id" pk="id" />
+			</fk>
+			<fk name="fk_articles_categories" to_schema="sporthub" to_table="categories" >
+				<fk_column name="categories_id" pk="id" />
+			</fk>
+		</table>
+		<table name="categories" prior="tbl" >
+			<column name="id" type="bigserial" jt="-5" mandatory="y" />
+			<column name="title" type="varchar" length="64" jt="12" mandatory="y" />
+			<column name="parent_id" type="integer" jt="4" >
+				<defo><![CDATA[null]]></defo>
+				<comment><![CDATA[Sub category]]></comment>
+			</column>
+			<column name="created_at" type="date" jt="91" mandatory="y" />
+			<column name="updated_at" type="date" jt="91" />
+			<index name="pk_categories_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_categories_title" unique="NORMAL" >
+				<column name="title" />
+			</index>
+		</table>
+		<table name="comments" prior="comment" spec="" >
+			<comment><![CDATA[Systems of commenting for articles]]></comment>
+			<column name="id" type="bigserial" jt="-5" mandatory="y" >
+				<defo><![CDATA[nextval('comments_id_seq'::regclass)]]></defo>
+				<comment><![CDATA[Comment id]]></comment>
+			</column>
+			<column name="text" type="text" length="250" jt="12" mandatory="y" >
+				<comment><![CDATA[Content of comment]]></comment>
+			</column>
+			<column name="user_id" type="bigserial" jt="-5" mandatory="y" >
+				<comment><![CDATA[Link to author current comment massage]]></comment>
+			</column>
+			<column name="article_id" type="bigserial" jt="-5" mandatory="y" >
+				<comment><![CDATA[Link to current article id]]></comment>
+			</column>
+			<column name="created_at" type="date" jt="91" mandatory="y" />
+			<column name="parent_id" type="bigserial" jt="-5" >
+				<comment><![CDATA[Subcomments]]></comment>
+			</column>
+			<column name="updated_at" type="date" jt="91" />
+			<index name="pk_tbl_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_comments" unique="NORMAL" >
+				<comment><![CDATA[Index of article_id]]></comment>
+				<column name="article_id" />
+			</index>
+			<fk name="fk_comments_comments" to_schema="sporthub" to_table="users" delete_action="restrict" update_action="restrict" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+			<fk name="fk_comments_article" to_schema="sporthub" to_table="articles" >
+				<fk_column name="article_id" pk="id" />
+			</fk>
+		</table>
+		<table name="users" >
+			<comment><![CDATA[Table of user]]></comment>
+			<column name="id" type="bigserial" jt="-5" mandatory="y" >
+				<defo><![CDATA[nextval('users_id_seq'::regclass)]]></defo>
+				<comment><![CDATA[User au id]]></comment>
+			</column>
+			<column name="email" type="varchar" length="64" jt="12" mandatory="y" >
+				<comment><![CDATA[User email and login]]></comment>
+			</column>
+			<column name="password_digist" type="varchar" length="255" jt="12" mandatory="y" >
+				<comment><![CDATA[User password {g by bcrypt}]]></comment>
+			</column>
+			<column name="first_name" type="varchar" length="100" jt="12" mandatory="y" >
+				<comment><![CDATA[User main name]]></comment>
+			</column>
+			<column name="created_at" type="date" jt="91" mandatory="y" >
+				<comment><![CDATA[Date of create at]]></comment>
+			</column>
+			<column name="updated_at" type="date" jt="91" />
+			<index name="pk_users_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="unq_users_email" unique="UNIQUE_INDEX" >
+				<comment><![CDATA[User must get unique emal]]></comment>
+				<column name="email" />
+			</index>
+			<index name="idx_users" unique="NORMAL" >
+				<column name="first_name" />
+			</index>
+		</table>
+	</schema>
+	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" />
+	<layout name="Default Layout" id="Layout-1516" show_relation="columns" >
+		<entity schema="sporthub" name="articles" color="C1D8EE" x="880" y="368" />
+		<entity schema="sporthub" name="categories" color="C1D8EE" x="1328" y="432" />
+		<entity schema="sporthub" name="comments" color="C1D8EE" x="512" y="672" />
+		<entity schema="sporthub" name="users" color="C1D8EE" x="496" y="208" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[DbSchema is disconnected from the database.
+New designed tables will be saved to project file and later can be create in any database.
+Right-click the layout to create new tables. Drop this callout from its context menu.]]></comment>
+		</callout>
+	</layout>
+</project>
