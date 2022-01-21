@@ -16,7 +16,10 @@
 
 @import 'vendor/bootstrap';
 @import 'sass-utils/variables';
+@import 'sass-utils/globals';
 @import 'layout/header';
+@import 'layout/sidebar';
+@import 'layout/content';
 
 
 .gradient-custom {

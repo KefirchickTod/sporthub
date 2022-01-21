@@ -1,0 +1,26 @@
+.sidebar{
+  width: $sidebar-width;
+  height: 100vh;
+  background-color: $background-body;
+
+
+  .nav-item{
+    .hub-nav{
+      color: $sidebar-menu-color;
+    }
+  }
+  .hub-item-active{
+    .hub-nav{
+      color: $sidebar-menu-active-color;
+    }
+    &:before{
+      content: "\2022";
+      color: $sidebar-menu-active-color;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+  }
+}
