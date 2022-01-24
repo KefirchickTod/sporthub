@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sporthub</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+</head>
+
+<body>
+
+<nav class="nav d-flex justify-content-between">
+
+    <div class="nav-item-1">
+        <h1 class=" logo"><a style="color:white; text-decoration:none" href="/">Sport hub</a></h1>
+    </div>
+
+    <div class="nav-item-4">
+        <ul class="nav-item-list">
+            <li>
+                <span>Don’t have an account?</span>
+            </li>
+            <li>
+                <a href="#" class="btn  btn-outline-danger">Get started</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<% flash.each do |type, massage| %>
+    <div class="alert alert-<%= type %>" role="alert">
+            <span>
+                <%= massage %>
+            </span>
+    </div>
+<% end %>
+
+<div class="d-flex align-items-start ">
+    <div class="side-image col-lg-6 col-md-6 col-sm-12">
+        <img src="" decoding="async" loading="lazy" alt="authentication"/>
+    </div>
+
+
+    <div class="content-block col-lg-6 col-md-6 col-sm-12" id="<%= controller_name %>">
+        <%= yield %>
+    </div>
+</div>
+
+
+</body>
+</html>

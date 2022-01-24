@@ -17,6 +17,11 @@ module Authentication
     redirect_to "/", alert: "You are already logged in." if user_signed_in?
   end
 
+  # Check if user signed if false then redirect to home "/"
+  def redirect_if_not_authenticated
+    redirect_to "/", alert: "Permission denied." unless user_signed_in?
+  end
+
   private
 
   # Get current session user

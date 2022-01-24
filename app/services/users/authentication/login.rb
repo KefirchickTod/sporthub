@@ -18,6 +18,8 @@ class Users::Authentication::Login < Service
       @session[:user] = @user.id
     end
 
+    # puts @user.confirmed?, confirmation?
+
     @user
   end
 
@@ -25,9 +27,11 @@ class Users::Authentication::Login < Service
 
   # Was user get confirmation email?
   # If false, show notice error
-  def confirmation
-    return if @user.confirmed?
-    flash[:notice] = "Your email is not confirmed"
+  # @return[Boolean]
+  def confirmation?
+    return false if @user.confirmed?
+    @user.send_confirmation_email!
+    true
   end
 
   # Find user by email

@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class Authentication::SessionsController < Authentication::AuthenticationController
   before_action :redirect_if_authenticated, only: %i[create new]
 
   # Validates data from log in form
@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     @user = login.call
   rescue Users::Authentication::Login::InvalidPassword => e
-    session[:notice] = e.to_s
+    flash[:notice] = e.to_s
   ensure
     redirect_to "/"
   end
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   # Log out user
   def destroy
     logout
-    redirect_to "/", notice: "Signed out"
+    redirect_to "/", info: "Signed out"
   end
 
   # Show page for log in

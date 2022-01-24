@@ -2,19 +2,19 @@ class Users::Authentication::Register < Service
   class BadRegisterParam < ArgumentError
   end
 
-  def initialize(params)
+  def initialize(params, session)
     @params = validates(params)
-    @confirmation = Users::Authentication::Confirmation.new(params)
+    @session = session
   end
 
   def call
     @user = create_user
 
-    if defined?(session)
-      session[:user] = @user.id
+    if defined?(@session)
+      @session[:user] = @user.id
     end
 
-    send_confirmation
+    send_confirmation!
 
     @user
   end
@@ -22,8 +22,8 @@ class Users::Authentication::Register < Service
   private
 
   # Send confirmation to email
-  def send_confirmation
-    @confirmation.call
+  def send_confirmation!
+    Users::Authentication::Confirmation.new(@params[:email]).call
   end
 
   # Create new users
@@ -31,13 +31,8 @@ class Users::Authentication::Register < Service
   # @raise [BadRegisterParam]
   def create_user
     user = user!
+    raise BadRegisterParam.new("Cant create user, errors: #{user.errors.message}") unless user.save
 
-    unless user.save
-      massage = user.errors.messages
-
-      raise BadRegisterParam.new("Cant create user, errors: #{massage}")
-
-    end
     user
   end
 

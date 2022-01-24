@@ -1,6 +1,7 @@
 class Users::Authentication::Confirmation < Service
-  def initialize(params)
-    @params = validates(params)
+  def initialize(email, session = nil)
+    # @login = Users::Authentication::Login.new(params, session)
+    @email = email
   end
 
   # Run service
@@ -17,7 +18,7 @@ class Users::Authentication::Confirmation < Service
   # Find user by email
   # @return[User]
   def find_user
-    User.find_by(email: @params[:email])
+    @user = User.find_by(email: @email)
   end
 
   # Send mail to user email with confirm token
@@ -25,12 +26,5 @@ class Users::Authentication::Confirmation < Service
     return unless @user.unconfirmed?
 
     @user.send_confirmation_email!
-  end
-
-  # Validate outer params
-  # @param[ActionController::Parameters]
-  # @return[ActionController::Parameters]
-  def validates(p)
-    p.required(:user).permit(:email)
   end
 end
