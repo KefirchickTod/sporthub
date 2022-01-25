@@ -1,0 +1,36 @@
+<div class="container">
+    <%= link_to 'Add', new_admin_article_path, class: 'btn btn-outline-danger' %>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Public?</th>
+            <th>Author</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for article in @articles do %>
+            <tr>
+                <td><%= article.id %></td>
+                <td><%= article.title %></td>
+                <td><%= article.categories_id %></td>
+                <td><%= article.is_public %></td>
+                <td><%= article.users_id %></td>
+                <td><%= article.created_at %></td>
+                <td><%= article.updated_at %></td>
+                <td>
+                    <div class="d-flex flex-column">
+                        <%= link_to 'Edit', edit_admin_article_path(article.id), class: 'btn btn-success' %>
+                        <%= button_to 'Trash', admin_article_path(article.id), method: :delete,  class: 'btn btn-danger btn-sm' %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>

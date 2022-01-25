@@ -1,2 +1,16 @@
-<h1>Admin::Articles#new</h1>
-<p>Find me in app/views/admin/articles/new.html.erb</p>
+<div class="container" >
+    <%= form_with(model: @article, url: admin_articles_url, method: :post) do |form| %>
+        <% if  @article.errors.any? %>
+            <div style="color: red">
+                <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                <ul>
+                    <% @article.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <%= render 'admin/articles/form', form: form, categories: Category.all %>
+    <% end %>
+</div>

@@ -6,7 +6,7 @@ class Article < ApplicationRecord
   attribute :full_text, :string
   attribute :short_text, :string
   attribute :default_photo, :string
-  attribute :is_public, :boolean, default: true
+  attribute :is_public, :integer, default: 1
 
   # Relationship
   belongs_to :category, optional: true
@@ -16,6 +16,8 @@ class Article < ApplicationRecord
   validates :title, presence: true, uniqueness: {scope: :title, massage: "For each article have to unique title"}
   validates :short_text, presence: true, length: {maximum: 255}
   validates :full_text, presence: true
+  validates :users_id, presence: true
+  validates :categories_id, presence: true
 
   # Singleton
   class << self
