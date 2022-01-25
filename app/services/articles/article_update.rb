@@ -1,31 +1,33 @@
-class Articles::ArticleUpdate < Service
-  def initialize(params)
-    @params = validates(params)
-    @article = find(params[:id])
-  end
+module Articles
+  class ArticleUpdate < Service
+    def initialize(params)
+      @params = validates(params)
+      @article = find(params[:id])
+    end
 
-  def call
-    raise "404" unless @article.present?
+    def call
+      raise "404" unless @article.present?
 
-    raise @article.errors.full_messages.to_sentence unless @article.update(@params)
-  end
+      raise @article.errors.full_messages.to_sentence unless @article.update(@params)
+    end
 
-  private
+    private
 
-  # Find article by id
-  # @return[Article]
-  def find(id)
-    Article.find(id)
-  end
+    # Find article by id
+    # @return[Article]
+    def find(id)
+      Article.find(id)
+    end
 
-  def validates(p)
-    p.require(:article).permit(
-      :title,
-      :full_text,
-      :short_text,
-      :categories_id,
-      :is_public,
-      :default_photo
-    )
+    def validates(p)
+      p.require(:article).permit(
+        :title,
+        :full_text,
+        :short_text,
+        :categories_id,
+        :is_public,
+        :default_photo
+      )
+    end
   end
 end

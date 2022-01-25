@@ -1,18 +1,20 @@
-class Articles::ArticleDelete < Service
-  def initialize(id)
-    @id = id
-  end
+module Articles
+  class ArticleDelete < Service
+    def initialize(id)
+      @id = id
+    end
 
-  def call
-    @article = find
+    def call
+      @article = find
 
-    raise "Cant find article for delete" unless @article || @article.present?
-    raise "Error to delete" unless @article.destroy
-  end
+      raise "Cant find article for delete" unless @article || @article.present?
+      raise "Error to delete" unless @article.destroy
+    end
 
-  private
+    private
 
-  def find
-    Article.find(@id)
+    def find
+      Article.find(@id)
+    end
   end
 end

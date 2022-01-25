@@ -1,6 +1,6 @@
 require_relative "../../../config/environment"
 
-RSpec.describe "Articles" do
+RSpec.describe Articles do
   context "Editable" do
     before(:each) do
       @categories = Category.limit(5)
