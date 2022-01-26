@@ -16,7 +16,7 @@ module Articles
 
       # raise article.is_public.to_s
 
-      raise article.errors.full_messages.to_sentence unless article.save
+      raise ServiceException.new(article.errors.full_messages.to_sentence) unless article.save
 
       article
     end

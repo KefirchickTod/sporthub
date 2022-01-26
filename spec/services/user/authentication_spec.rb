@@ -2,6 +2,10 @@ require_relative "../../../config/environment"
 require "faker"
 
 RSpec.describe "Authentication" do
+  before(:each) do
+    @session = {}
+  end
+
   context "Register" do
     before(:each) do
       password = Faker::Internet.password
@@ -19,7 +23,7 @@ RSpec.describe "Authentication" do
     it "should register and get register instance users" do
       # p @params
       # @type[Authentication::Register]
-      register = Users::Authentication::Register.new(@params)
+      register = Users::Authentication::Register.new(@params, @session)
 
       # @type[ServiceResponse]
       response = register.run
@@ -37,7 +41,7 @@ RSpec.describe "Authentication" do
           email: "root@root.com",
           password: "admin123"
         }
-      }))
+      }), @session)
 
       expect(login.call).to be_a_kind_of(User)
     end
@@ -48,9 +52,9 @@ RSpec.describe "Authentication" do
           email: "notEmailInDb@root.com",
           password: "admin123213321"
         }
-      }))
+      }), @session)
 
-      expect { login.call }.to raise_error("Cant find user by email")
+      expect { login.call }.to raise_error("Incorrect email")
     end
   end
 end

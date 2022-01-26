@@ -1,4 +1,6 @@
 class Admin::ArticlesController < ApplicationController
+  include ServiceHandle
+
   # GET /admin/article
   def index
     @articles = Article.all
@@ -6,6 +8,9 @@ class Admin::ArticlesController < ApplicationController
 
   # GET /admin/article/:id
   def show
+    # parse_current_controller
+
+    # render plain: "#{get_redirect_url!(get_redirect_action(:update))} #{get_routes} #{@route_fn} #{@controller} #{params[:controller]} <br> #{params[:action]}"
   end
 
   # GET /admin/article/new
@@ -17,10 +22,8 @@ class Admin::ArticlesController < ApplicationController
   # POST /admin/article
   def create
     # raise params.to_s
+
     @article = Articles::ArticleCreate.new(params, session[:user]).call
-    redirect_to admin_article_url
-  rescue => e
-    redirect_to new_admin_article_url, alert: e.to_s
   end
 
   # GET /admin/article/edit
