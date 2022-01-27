@@ -9,8 +9,8 @@ class Article < ApplicationRecord
   attribute :is_public, :integer, default: 1
 
   # Relationship
-  belongs_to :category, optional: true
-  belongs_to :user, optional: true
+  belongs_to :category, foreign_key: "categories_id", primary_key: "id", optional: true # Why?
+  belongs_to :user, foreign_key: "users_id", primary_key: "id", optional: true
 
   # Validate
   validates :title, presence: true, uniqueness: {scope: :title, massage: "For each article have to unique title"}

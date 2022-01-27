@@ -18,15 +18,15 @@
             <tr>
                 <td><%= article.id %></td>
                 <td><%= article.title %></td>
-                <td><%= article.categories_id %></td>
+                <td><%= article.category.title %></td>
                 <td><%= article.is_public %></td>
-                <td><%= article.users_id %></td>
+                <td><%= article.user.first_name unless article.user.nil? %></td>
                 <td><%= article.created_at %></td>
                 <td><%= article.updated_at %></td>
                 <td>
                     <div class="d-flex flex-column">
                         <%= link_to 'Edit', edit_admin_article_path(article.id), class: 'btn btn-success' %>
-                        <%= button_to 'Trash', admin_article_path(article.id), method: :delete,  class: 'btn btn-danger btn-sm' %>
+                        <%= button_to 'Trash', admin_article_path(article.id), method: :delete, class: 'btn btn-danger btn-sm' %>
                     </div>
                 </td>
             </tr>

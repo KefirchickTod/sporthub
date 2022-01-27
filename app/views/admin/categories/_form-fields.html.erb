@@ -1,0 +1,11 @@
+<div class="form-group">
+    <%= form.label :title, 'Title', class: "form-label" %>
+    <%= form.text_field :title, class: 'form-control form-control-lg', required: true %>
+</div>
+<div class="form-group">
+    <%= form.label :parent_id, 'Parent', class: "form-label" %>
+    <%= form.collection_select :parent_id, ([] << categories).flatten!, :id, :title, class: 'form-control form-control-lg' %>
+</div>
+<div class="form-group">
+    <%= form.submit 'Create', class: 'btn btn-success' %>
+</div>

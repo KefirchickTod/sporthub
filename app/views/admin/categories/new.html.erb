@@ -1,0 +1,6 @@
+<div class="container">
+    <% form_with(model: @categories, url: admin_categories_url, method: :post) do |form| %>
+        <%= render 'admin/categories/form-fields', form: form, categories: Category.all %>
+    <% end %>
+
+</div>
