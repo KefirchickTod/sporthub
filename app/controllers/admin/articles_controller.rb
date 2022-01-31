@@ -1,6 +1,7 @@
 module Admin
   class ArticlesController < Admin::AdminController
-    include ServiceHandle
+    after_action
+    # include ServiceHandle
 
     # GET /admin/article
     def index

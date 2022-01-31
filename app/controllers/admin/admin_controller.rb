@@ -1,6 +1,7 @@
 module Admin
   class AdminController < ApplicationController
-    include ServiceHandle
+    include Resources::HandleServiceException
+    include Resources::AutoRedirect
     # layout 'admin'
 
     # Action
