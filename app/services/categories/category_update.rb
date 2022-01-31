@@ -11,7 +11,7 @@ module Categories
     def initialize(id, params)
       raise "Cant write nil id for update category" if id.nil?
 
-      @id = params[:id]
+      @id = id
       @params = validate(params)
     end
 

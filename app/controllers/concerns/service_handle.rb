@@ -11,6 +11,8 @@ module ServiceHandle
     create: :new,
     destroy: :index
   }
+  # List of allowed action in route fn name
+  ALLOW_ACTION = %i[new edit]
 
   included do
     before_action :parse_current_controller
@@ -40,7 +42,7 @@ module ServiceHandle
   def initialize_controller(controller, action, route_root_fn_name)
     @controller = controller
     @action = get_redirect_action(action)
-    @route_fn = route_root_fn_name[0...-1] if route_root_fn_name.last == "s"
+    @route_fn = route_root_fn_name.singularize # if route_root_fn_name.pluralize == route_root_fn_name
     @routes = get_routes
   end
 
@@ -64,8 +66,14 @@ module ServiceHandle
   # @return[String]
   def build_helper_fn(action, delete_s = true)
     action = get_redirect_action(action) if RESOURCE_ACTION.has_key?(action)
-    fn = @route_fn.last == "s" && delete_s ? @route_fn[0...-1] : @route_fn
-    "#{action}_#{fn}"
+
+    function_name = delete_s ? @route_fn : @route_fn.pluralize
+    if ALLOW_ACTION.include?(action)
+      "#{action}_#{function_name}"
+    else
+      # puts function_name.pluralize
+      function_name.pluralize
+    end
   end
 
   # Find helper function by current controller method and get it

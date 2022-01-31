@@ -25,7 +25,7 @@ module Categories
     # @param[ActionController::Parameters]
     # @return[ActionController::Parameters]
     def validate(p)
-      p.require(:categories).permit(:title, :parent_id)
+      p.require(:category).permit(:title, :parent_id)
     end
   end
 end

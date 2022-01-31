@@ -3,7 +3,7 @@ class Authentication::PasswordsController < Authentication::AuthenticationContro
     Users::Authentication::Password::CreatorPasswordResetSender.new(params).call
   rescue Users::Authentication::Password::ConfirmationError => e
     redirect_to new_authentication_confirmations_path, alert: e.to_s
-  rescue Users::Authentication::Exception::InvalidEmailError => e
+  rescue Users::Authentication::Exceptions::InvalidEmailError => e
     redirect_to "/", notice: e.to_s
   end
 

@@ -1,5 +1,6 @@
 module Admin
   class AdminController < ApplicationController
+    include ServiceHandle
     # layout 'admin'
 
     # Action

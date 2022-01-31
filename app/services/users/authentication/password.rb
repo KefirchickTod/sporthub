@@ -26,7 +26,7 @@ module Users
         # Find user by email or raise Invalid error
         def find_user
           @user = User.find_by(email: @params[:email])
-          raise Users::Authentication::Exception::InvalidEmailError.new("If that user exists we've sent instructions to their email.") unless @user.present?
+          raise Users::Authentication::Exceptions::InvalidEmailError.new("If that user exists we've sent instructions to their email.") unless @user.present?
         end
 
         # Validate params

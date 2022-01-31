@@ -1,0 +1,36 @@
+<div class="container">
+    <%= link_to 'Add', new_admin_category_path, class: 'btn btn-outline-danger' %>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Parent</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for category in @categories do %>
+            <tr>
+                <td><%= category.id %></td>
+                <td><%= category.title %></td>
+                <td>
+                    <% if category.parent_id %>
+                        <%= category.parent.title %>
+                    <% end %>
+                </td>
+                <td><%= category.created_at %></td>
+                <td><%= category.updated_at %></td>
+                <td>
+                    <div class="d-flex flex-column">
+                        <%= link_to 'Edit', edit_admin_category_path(category.id), class: 'btn btn-success' %>
+                        <%= button_to 'Trash', admin_category_path(category.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>

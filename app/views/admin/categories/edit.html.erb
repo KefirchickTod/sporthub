@@ -1,7 +1,5 @@
 <div class="container">
-
-    <%= form_with(model: @category, url: admin_categories_url, method: :post) do |form| %>
-
+    <%= form_with(model: @category, url: admin_category_url, method: :patch ) do |form| %>
         <%= render 'admin/categories/form-fields', form: form, categories: Category.all %>
     <% end %>
 

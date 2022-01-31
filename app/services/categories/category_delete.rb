@@ -4,11 +4,14 @@ module Categories
       @id = id
     end
 
+    # @return[Boolean]
     def call
       # @type[Category]
       @category = find
 
       raise @category.errors.messages.to_sentence unless @category.delete
+
+      @category.destroyed?
     end
 
     private
