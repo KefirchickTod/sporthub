@@ -6,6 +6,7 @@ describe Articles::Create do
   include_context 'articles'
 
   let(:user_id) { user.id }
+
   context 'when valid all params' do
 
     it { expect(subject.run.success?).to be_truthy }

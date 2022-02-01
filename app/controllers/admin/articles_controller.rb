@@ -1,13 +1,10 @@
 module Admin
   class ArticlesController < Admin::AdminController
-    after_action
     # include ServiceHandle
 
     # GET /admin/article
     def index
       @articles = Article.all
-
-      # puts @article
     end
 
     # GET /admin/article/:id
@@ -39,8 +36,6 @@ module Admin
     def update
       @article = Articles::Update.new(article_params).call
       redirect_to admin_article_url
-    rescue => e
-      redirect_to edit_admin_article_url(params[:id]), alert: e.to_s
     end
 
     # POST /admin/article
@@ -48,7 +43,6 @@ module Admin
       Articles::Delete.new(params[:id]).call
       redirect_to admin_article_url
     end
-
 
     private
 
