@@ -2,12 +2,12 @@ class Category < ApplicationRecord
   before_destroy :delete_articles
 
   # Validates
-  validates :title, uniqueness: {scope: :title, massage: "Category title hos to get unique key"}
+  validates :title, uniqueness: { scope: :title, massage: "Category title hos to get unique key" }
 
   # Relations
   has_many :articles, primary_key: "categories_id", foreign_key: "id"
   has_many :children, class_name: "Category", foreign_key: "parent_id"
-  belongs_to :parent, class_name: "Category"
+  belongs_to :parent, class_name: "Category", optional: true
 
   # Get all sub categories for current category
   #   all_sub_categories # get array of hash

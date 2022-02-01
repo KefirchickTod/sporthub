@@ -1,9 +1,9 @@
 module Articles
-  class ArticleCreate < Service
+  class Create < Service
     # @param[ActionController]
     # @param[Integer]
     def initialize(params, user_id)
-      @params = validates(params)
+      @params = params
       @user_id = user_id
     end
 
@@ -21,17 +21,5 @@ module Articles
       article
     end
 
-    private
-
-    def validates(p)
-      p.require(:article).permit(
-        :title,
-        :full_text,
-        :short_text,
-        :categories_id,
-        :is_public,
-        :default_photo
-      )
-    end
   end
 end

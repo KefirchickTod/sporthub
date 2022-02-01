@@ -1,5 +1,5 @@
 module Articles
-  class ArticleDelete < Service
+  class Delete < Service
     def initialize(id)
       @id = id
     end

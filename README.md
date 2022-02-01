@@ -3,7 +3,7 @@
 - install [rbenv](https://github.com/rbenv/rbenv)
 
 ```bash
-sudo apt install rbenv
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
 rbenv init
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 ```
@@ -46,7 +46,7 @@ For each migration(table) need create a seed
 
 # Version
 
-- ruby 2.7.0
+- ruby 3.0.0
 - rails 7.0.1
 - bundle 2.1.4
 - gem 3.1.2

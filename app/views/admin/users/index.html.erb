@@ -1,0 +1,36 @@
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>First name</th>
+            <th>Second name</th>
+            <th>Confirmed at</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for user in @users do %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.email %></td>
+                <td><%= user.first_name %></td>
+                <td><%= user.second_name %></td>
+                <td><%= user.confirmed_at %></td>
+                <td><%= user.reset_password_sent_at %></td>
+                <td><%= user.updated_at %></td>
+                <td><%= user.updated_at %></td>
+                <td>
+                    <div class="d-flex flex-column">
+                        <%= link_to 'Edit', edit_admin_user_path(user.id), class: 'btn btn-success' %>
+                        <%= button_to 'Trash', admin_user_path(user.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>

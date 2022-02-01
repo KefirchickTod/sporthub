@@ -26,7 +26,7 @@ module Admin
     # POST /admin/article
     def create
       # raise params.to_s
-      @article = Articles::ArticleCreate.new(params, session[:user]).call
+      @article = Articles::Create.new(article_params, session[:user]).call
       redirect_to admin_article_url
     end
 
@@ -37,7 +37,7 @@ module Admin
 
     # POST /admin/article
     def update
-      @article = Articles::ArticleUpdate.new(params).call
+      @article = Articles::Update.new(article_params).call
       redirect_to admin_article_url
     rescue => e
       redirect_to edit_admin_article_url(params[:id]), alert: e.to_s
@@ -45,8 +45,23 @@ module Admin
 
     # POST /admin/article
     def destroy
-      Articles::ArticleDelete.new(params[:id]).call
+      Articles::Delete.new(params[:id]).call
       redirect_to admin_article_url
     end
+
+
+    private
+
+    def article_params
+      params.require(:article).permit(
+        :title,
+        :full_text,
+        :short_text,
+        :categories_id,
+        :is_public,
+        :default_photo
+      )
+    end
+
   end
 end
