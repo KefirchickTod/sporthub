@@ -12,6 +12,8 @@ module Articles
     def call
       article = Article.new(@params)
 
+      raise ServiceException.new("Cant find user with id [#{@user_id}]") unless user?
+
       article.users_id = @user_id
 
       # raise article.is_public.to_s
@@ -21,5 +23,13 @@ module Articles
       article
     end
 
+    private
+
+    def user?
+      User.find_by(id: @user_id).present?
+    rescue
+      false
+    end
   end
+
 end
