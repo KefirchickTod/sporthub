@@ -13,12 +13,12 @@ module Admin
 
     # GET /admin/categories/create
     def create
-      Categories::CategoryCreate.new(params).call
+      Categories::Create.new(category_params).call
       redirect_to admin_categories_url
     end
 
     def update
-      Categories::CategoryUpdate.new(params[:id], params).call
+      Categories::Update.new(params[:id], category_params).call
       redirect_to admin_categories_url
     end
 
@@ -27,10 +27,17 @@ module Admin
     end
 
     def destroy
-      Categories::CategoryDelete.new(params[:id]).call
+      Categories::Delete.new(params[:id]).call
     end
 
     def show
     end
+
+    private
+
+    def category_params
+      params.require(:category).permit(:title, :parent_id)
+    end
+
   end
 end

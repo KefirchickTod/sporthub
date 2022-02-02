@@ -1,24 +1,20 @@
 module Categories
-  class CategoryDelete < Service
+  class Delete < Service
     def initialize(id)
       @id = id
     end
 
-    # @return[Boolean]
+    # @return[Category]
     def call
       # @type[Category]
       @category = find
 
       raise @category.errors.messages.to_sentence unless @category.delete
 
-      @category.destroyed?
+      @category
     end
 
     private
-
-    def remove_articles
-      # remove all conecnter articles
-    end
 
     # Find category by id
     # @return[Category]

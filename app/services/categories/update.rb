@@ -4,20 +4,23 @@ module Categories
   #   # If bad id then raise StandardError
   #   # @type[Category] returned type
   #   Categories::CategoryUpdate.new(params[:id], params).call
-  class CategoryUpdate < Service
+  class Update < Service
     attr_reader :category
 
-    # @param[ActionController::Parameters]
+    # @param[Integer]
+    # @param[Hash]
     def initialize(id, params)
       raise "Cant write nil id for update category" if id.nil?
 
       @id = id
-      @params = validate(params)
+      @params = params
     end
 
     # Update current category
     def call
       @category = find
+
+      raise ServiceException.new("Incorrect parent id for category #{@params.parent_id}") unless correct_parent_id?
       raise @category.errors.messages.to_sentence unless @category.update(@params)
 
       @category
@@ -32,9 +35,11 @@ module Categories
       raise ServiceException.new(e.to_s)
     end
 
-    # @param[ActionController::Parameters]
-    def validate(p)
-      p.require(:category).permit(:title, :parent_id)
+    def correct_parent_id?
+      return true if @params[:parent_id].nil?
+      Category.find_by(id: @params[:parent_id]).present?
     end
+
+
   end
 end
