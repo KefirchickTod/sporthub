@@ -1,4 +1,4 @@
-require_relative "../../config/environment"
+require 'rails_helper'
 
 RSpec.describe Service do
   it "should run the service" do

@@ -1,5 +1,5 @@
-require_relative "../../../config/environment"
-require "faker"
+require "rails_helper"
+
 
 RSpec.describe "Authentication" do
   before(:each) do

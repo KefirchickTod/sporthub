@@ -3,6 +3,9 @@ class User < ApplicationRecord
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
   MAILER_FROM_EMAIL = "no-reply@example.com"
 
+  # Include block
+  has_secure_password
+
   # Virtus
   # include Virtus.model
 
@@ -12,13 +15,13 @@ class User < ApplicationRecord
   attribute :second_name, :string
 
   before_save :downcase_email
+  #before_destroy :remove_all_relations
 
   # Validate block
-  validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email"}
-  validates :password, presence: true, length: {minimum: 8, maximum: 128}
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email" }
+  validates :password, presence: true, length: { minimum: 8, maximum: 128 }
 
-  # Include block
-  has_secure_password
+  has_many :articles, primary_key: 'users_id', foreign_key: "id"
 
   # Set user confirm
   def confirm!
@@ -67,4 +70,6 @@ class User < ApplicationRecord
   def downcase_email
     self.email = email.downcase
   end
+
+
 end

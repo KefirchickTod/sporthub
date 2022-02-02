@@ -1,4 +1,4 @@
-require_relative '../../config/environment'
+require 'rails_helper'
 
 RSpec.describe ServiceResponse do
 
