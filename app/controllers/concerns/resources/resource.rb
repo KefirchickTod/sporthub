@@ -11,6 +11,7 @@ module Resources
 
     # Use only private or protected methods
     # Basic function for rest modules
+
     protected
 
     # Get correct method for redirect
@@ -52,11 +53,10 @@ module Resources
     def build_helper_fn(action, delete_s = true)
       action = get_redirect_action(action) if RESOURCE_ACTION.has_key?(action)
 
-      function_name = delete_s ? @route_fn : @route_fn.pluralize
-      if ALLOW_ACTION.include?(action)
+      function_name = delete_s ? @route : @route.pluralize
+      if Resources::HandleServiceException::ALLOW_ACTION.include?(action)
         "#{action}_#{function_name}"
       else
-        # puts function_name.pluralize
         function_name.pluralize
       end
     end

@@ -26,6 +26,7 @@ module Resources
       get_redirect_url!(@action)
     end
 
+
     # Check if controller result has redirect
     def redirect?
       performed?

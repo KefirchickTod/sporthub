@@ -15,13 +15,13 @@ class User < ApplicationRecord
   attribute :second_name, :string
 
   before_save :downcase_email
-  #before_destroy :remove_all_relations
+  before_destroy :remove_all_relations
 
   # Validate block
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email" }
-  validates :password, presence: true, length: { minimum: 8, maximum: 128 }
+  validates :password, presence: true, length: { minimum: 8, maximum: 128 }, on: :create
 
-  has_many :articles, primary_key: 'users_id', foreign_key: "id"
+  has_many :articles, primary_key: 'id', foreign_key: "users_id"
 
   # Set user confirm
   def confirm!
@@ -64,12 +64,17 @@ class User < ApplicationRecord
     UserMailer.password_reset(self, password_reset_token).deliver_now
   end
 
+  def remove_all_relations
+    articles.each do |article|
+      article.delete
+    end
+  end
+
   private
 
   # Convert email to low register
   def downcase_email
     self.email = email.downcase
   end
-
 
 end

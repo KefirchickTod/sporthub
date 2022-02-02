@@ -5,7 +5,7 @@ module Users
     end
 
     def call
-      raise ServiceException.new("Some error delete") unless user.delete
+      raise ServiceException.new("Some error delete") unless user.destroy
 
     end
 

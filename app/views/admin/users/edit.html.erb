@@ -1,0 +1,6 @@
+<div class="container">
+    <%= form_with(model: @user, url: admin_user_url, method: :patch ) do |form| %>
+        <%= render 'admin/users/form', form: form %>
+    <% end %>
+
+</div>
