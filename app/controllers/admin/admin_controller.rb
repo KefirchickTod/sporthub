@@ -1,5 +1,6 @@
 module Admin
   class AdminController < ApplicationController
+    include Pagy::Backend
     include Resources::HandleServiceException
     include Resources::AutoRedirect
     # layout 'admin'

@@ -2,7 +2,7 @@ module Admin
   class CategoriesController < Admin::AdminController
     # GET /admin/categories
     def index
-      @categories = Category.all
+      @pagy, @categories = pagy(Category.all)
     end
 
     # Get /admin/categories/new

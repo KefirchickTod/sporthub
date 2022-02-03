@@ -4,7 +4,7 @@ module Admin
 
     # GET /admin/article
     def index
-      @articles = Article.all
+      @pagy, @articles = pagy(Article.all)
     end
 
     # GET /admin/article/:id

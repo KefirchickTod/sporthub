@@ -51,6 +51,9 @@ gem "sassc-rails"
 # Virtus allows you to define attributes on classes, modules or class instances with optional information about types
 gem "virtus"
 
+# Fact pagination gem [https://github.com/ddnexus/pagy]
+gem 'pagy', '~> 5.10' # omit patch digit
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
