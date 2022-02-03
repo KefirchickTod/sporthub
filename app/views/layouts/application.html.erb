@@ -62,16 +62,20 @@
         <ul class="nav-item-list">
             <% if user_signed_in? %>
                 <li>
-                    <%= current_user.full_name %>
+                    <%= link_to current_user.full_name, users_path %>
+
                 </li>
                 <li class="btn btn-outline">
 
                     <%= link_to 'Log out', authentication_logout_path %>
                 </li>
             <% else %>
-                <li class="btn"><a style="color:red; text-decoration:none" href="<%= new_authentication_register_path %>">Sign up</a></li>
+                <li class="btn">
+                    <a style="color:red; text-decoration:none" href="<%= new_authentication_register_path %>">Sign
+                        up</a></li>
                 <li class="btn btn-outline">
-                    <a style="color:red; text-decoration:none" href="<%= new_authentication_login_path %>">Log in</a></li>
+                    <a style="color:red; text-decoration:none" href="<%= new_authentication_login_path %>">Log in</a>
+                </li>
             <% end %>
 
             <li class="dropdown">
@@ -121,8 +125,6 @@
         <%= yield %>
     </div>
 </div>
-
-
 
 
 </body>

@@ -2,7 +2,7 @@ module Admin
   class UsersController < Admin::AdminController
     # GET admin/users
     def index
-      @users = User.all
+      @pagy, @users = pagy(User.all)
     end
 
     # GET /admin/user/[:id]
