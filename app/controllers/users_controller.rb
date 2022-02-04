@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   # POST /users/:id
   def update
-    Users::Update.new(current_user.id, user_params).call
+    Users::Update.new(current_user.id, user_params, params[:user][:image]).call
   end
 
   def destroy
@@ -28,5 +28,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name, :second_name, :email)
   end
+
+
 
 end

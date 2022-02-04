@@ -1,15 +1,19 @@
 module Users
   class Update < Service
 
-    def initialize(id, params)
+    def initialize(id, params, image)
       @params = params
       @id = id
+      @image = image
     end
 
     def call
       @user = find_user
 
       raise ServiceException.new(@user.errors.messages) unless @user.update(@params)
+
+      @user.image.attach(@image)
+
       @user
     end
 

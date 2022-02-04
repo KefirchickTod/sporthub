@@ -22,6 +22,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8, maximum: 128 }, on: :create
 
   has_many :articles, primary_key: 'id', foreign_key: "users_id"
+  has_one_attached :image, dependent: :destroy
 
   # Set user confirm
   def confirm!
