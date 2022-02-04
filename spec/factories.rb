@@ -1,5 +1,9 @@
 require 'faker'
 FactoryBot.define do
+  factory :team do
+    
+  end
+
   factory :banner do
     
   end
