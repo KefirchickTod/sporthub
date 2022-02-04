@@ -9,12 +9,7 @@ require "faker"
 #   Character.create(name: "Luke", movie: movies.first)
 
 ROOT = "#{Rails.root}/db/seeders/"
-DIRS = [
- 'users',
- 'categories',
- 'article',
- 'comments'
-].map { |x| "#{ROOT}#{x}.seed.rb" }
+DIRS = %w[users categories article comments].map { |x| "#{ROOT}#{x}.seed.rb" }
 
 
 # Main fn for run seed

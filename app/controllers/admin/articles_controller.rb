@@ -23,8 +23,8 @@ module Admin
     # POST /admin/article
     def create
       # raise params.to_s
-      @article = Articles::Create.new(article_params, session[:user]).call
-      redirect_to admin_article_url
+      @article = Articles::Create.new(article_params, session[:user], params[:article][:image]).call
+      # redirect_to admin_article_url
     end
 
     # GET /admin/article/edit
@@ -53,7 +53,7 @@ module Admin
         :short_text,
         :categories_id,
         :is_public,
-        :default_photo
+        :images
       )
     end
 
