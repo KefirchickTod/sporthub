@@ -1,5 +1,9 @@
 require 'faker'
 FactoryBot.define do
+  factory :banner do
+    
+  end
+
 
   factory(:user) do
     first_name { Faker::Internet.email }
