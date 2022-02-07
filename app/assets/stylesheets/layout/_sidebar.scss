@@ -1,19 +1,21 @@
-.sidebar{
+.sidebar {
   width: $sidebar-width;
   height: 100vh;
   background-color: $background-body;
 
 
-  .nav-item{
-    .hub-nav{
+  .nav-item {
+    .hub-nav {
       color: $sidebar-menu-color;
     }
   }
-  .hub-item-active{
-    .hub-nav{
+
+  .hub-item-active {
+    .hub-nav {
       color: $sidebar-menu-active-color;
     }
-    &:before{
+
+    &:before {
       content: "\2022";
       color: $sidebar-menu-active-color;
       font-weight: bold;
@@ -22,5 +24,11 @@
       margin-left: -1em;
     }
 
+  }
+}
+
+#main-nav {
+  ul {
+    list-style: none;
   }
 }

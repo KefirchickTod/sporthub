@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   # Site info routes
 
   resource :users, except: %i[new create]
+  resources :articles
 
 
 end

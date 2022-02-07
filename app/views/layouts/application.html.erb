@@ -100,32 +100,134 @@
         </ul>
     </div>
 </nav>
-
-<div class="d-flex align-items-start ">
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar">
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item hub-item-active">
-                <a href="#" class="hub-nav" aria-current="page">
-                    Home
-                </a>
-            </li>
-        </ul>
-    </div>
-
-
-    <% flash.each do |type, massage| %>
-        <div class="alert alert-danger" role="alert">
+<% flash.each do |type, massage| %>
+    <div class="alert alert-danger" role="alert">
         <span>
             <%= massage %>
 
         </span>
+    </div>
+<% end %>
+<div class="container-fluid row">
+    <div class="center-block col-md-3">
+        <div class="container d-flex flex-column p-5">
+            <nav id="main-nav" class="">
+                <ul>
+                    <li><%= link_to 'Todo category', root_path, class: 'menu-item__text'  %></li>
+                    <li class="p-2"><%= link_to 'articles', root_path, class: 'menu-item__text' %></li>
+                    <li class="p-2"><%= link_to 'Team Hub',root_path, class: 'menu-item__text' %></li>
+                    <li class="p-2"><%= link_to 'LIFESTYLE', root_path, class: 'menu-item__text' %></li>
+                    <li class="p-2"><%= link_to 'DEALBOOK', root_path, class: 'menu-item__text' %></li>
+                    <li class="p-2"><%= link_to 'VIDEO', root_path, class: 'menu-item__text' %></li>
+                </ul>
+            </nav>
+
         </div>
-    <% end %>
-    <div class="content-block" id="<%= controller_name %>">
+    </div>
+    <div class="content-block col-md-9" id="<%= controller_name %>">
         <%= yield %>
     </div>
 </div>
 
+<footer class=" footer page-footer font-small pt-4 ">
 
+    <!-- Footer Links -->
+    <div class="container">
+        <div class="center-block col-md-12 text-left text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mt-md-0 mt-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase text-medium">COMPANY INFO </h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">About Sports Hub</a>
+                        </li>
+                        <li>
+                            <a href="#!">News / In the Press</a>
+                        </li>
+                        <li>
+                            <a href="#!">Advertising / Sports Blogger Ad Network</a>
+                        </li>
+                        <li>
+                            <a href="#!">Events</a>
+                        </li>
+                        <li>
+                            <a href="#!">Contact Us</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase text-medium">CONTRIBUTORS </h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Featured Writers Program
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#!">Featured Team Writers Program</a>
+                        </li>
+                        <li>
+                            <a href="#!">Internship Program</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase text-medium">NEWSLETTER</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Sign up to receive the latest sports news</a>
+                        </li>
+
+                    </ul>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Enter email to subscribe">
+                        <span class="input-group-btn"> <button type="button" class="btn btn-danger">Subscribe</button></span>
+
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+    </div>
+    <!-- Copyright -->
+    <div class="footer-copyright py-3 px-3">
+        <div class="row align-items-center">
+            <div class="col-sm-6 copyright ">
+                <p class="text-left logo-text">Sports Hub</p>
+            </div>
+            <div class="col-sm-6 copyright">
+                <p class="text-right copyright-text">Copyright ©2019 Sports Hub <br> Privacy / Terms</p></div>
+        </div>
+    </div>
+    <!-- Copyright -->
+
+</footer>
 </body>
 </html>

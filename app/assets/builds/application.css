@@ -11345,9 +11345,8 @@ a {
   margin-left: -1em;
 }
 
-.content-block {
-  width: calc(100% - 256px);
-  height: 100vh;
+#main-nav ul {
+  list-style: none;
 }
 
 .gradient-custom {
