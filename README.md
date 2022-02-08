@@ -1,4 +1,37 @@
-# Installation
+# Version
+
+- ruby 3.0.0
+- rails 7.0.1
+- bundle 2.1.4
+- gem 3.1.2
+
+# System dependencies
+
+- Linux(Ubuntu 20.04.3 LTS)
+
+# Configuration
+
+- Config your database.yml for postgres
+
+# Database
+
+After config database.yml run:
+
+```bash
+rails db:create
+rails db:migrate
+rails db:seed
+```
+
+If you have error with db try delete regenerate master.key and credentials.yml.enc
+
+For create db diagrams use [DbSchema](https://dbschema.com/download.html)
+
+For each migration(table) need create a seed
+
+![Scheme](db-scheme.png)
+
+# For install ruby
 
 - install [rbenv](https://github.com/rbenv/rbenv)
 
@@ -15,21 +48,10 @@ bundle install
 npm i  
 ```
 
-- config your database environment in file config/database.yml and create db in conlse
-
-```bash
-rails db:create
-rails db:migrate
-rails db:seed
-```
-
-- if u have error with db try delete regenerate master.key and credentials.yml.enc
-
-
 - run server
 
 ```bash
-rails s 
+rails s -p 3001
 ```
 
 - for build scss use
@@ -38,18 +60,8 @@ rails s
 npm run-script build:css
 ```
 
-# Additional
+# Authors
 
-For create db diagrams use [DbSchema](https://dbschema.com/download.html)
+- [Kefirchick](mailto:zacharpu2@gmail.com?subject=[GitHub]%20Source%20Han%20Sans)
 
-For each migration(table) need create a seed
-
-![Scheme](db-scheme.png)
-
-# Version
-
-- ruby 3.0.0
-- rails 7.0.1
-- bundle 2.1.4
-- gem 3.1.2
 
