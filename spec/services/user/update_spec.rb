@@ -5,8 +5,7 @@ describe Users::Update do
 
   include_context 'users'
 
-
-
+  let!(:user) { create(:user) }
   context 'when valid params' do
     let(:id) { user.id }
     it { expect(subject.call).to be_a_kind_of(User) }
@@ -14,7 +13,7 @@ describe Users::Update do
 
   context "when not unique email" do
     let(:email) { user.email }
-    it { expect (subject.run.error?).to be_truthy }
+    it { expect(subject.run.error?).to be_truthy }
   end
 
   context 'when invalid id' do

@@ -1,8 +1,7 @@
 module Users
   module Authentication
     class Confirmation < Service
-      def initialize(email, session = nil)
-        # @login = Users::Authentication::Login.new(params, session)
+      def initialize(email)
         @email = email
       end
 
@@ -10,7 +9,7 @@ module Users
       def call
         @user = find_user
 
-        raise "cant find user by email [#{@params[:email]}]" unless @user.present?
+        raise ServiceException.new("cant find user by email [#{@email}]") unless @user.present?
 
         send_confirmation
       end

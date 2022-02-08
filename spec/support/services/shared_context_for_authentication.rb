@@ -1,28 +1,9 @@
 RSpec.shared_context 'confirmation' do
-  let(:id) { nil }
-  let(:email) { Faker::Internet.unique.email }
-  let(:params) do
-    {
-      id: id,
-      email: email,
-      first_name: Faker::Games::ElderScrolls.first_name,
-      second_name: Faker::Games::ElderScrolls.last_name
-    }
-  end
+  let(:user) { create(:user) }
+  let(:email) { user.email }
+
 end
 
-RSpec.shared_context 'password' do
-  let(:id) { nil }
-  let(:email) { Faker::Internet.unique.email }
-  let(:params) do
-    {
-      id: id,
-      email: email,
-      first_name: Faker::Games::ElderScrolls.first_name,
-      second_name: Faker::Games::ElderScrolls.last_name
-    }
-  end
-end
 RSpec.shared_context 'login' do
   let(:user) { create(:user) }
   let(:session) { {} }
@@ -52,4 +33,11 @@ RSpec.shared_context 'register' do
       second_name: Faker::Games::ElderScrolls.last_name
     }
   end
+end
+
+RSpec.shared_context 'password' do
+  let(:user) { create(:user) }
+  let(:email) { user.email }
+  let(:password){ Faker::Internet.unique.password }
+  let(:token) { user.generate_confirmation_token }
 end

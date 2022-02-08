@@ -1,7 +1,7 @@
 module Users
   class Update < Service
 
-    def initialize(id, params, image)
+    def initialize(id, params, image = nil)
       @params = params
       @id = id
       @image = image
@@ -12,7 +12,9 @@ module Users
 
       raise ServiceException.new(@user.errors.messages) unless @user.update(@params)
 
-      @user.image.attach(@image)
+      if @image
+        @user.image.attach(@image)
+      end
 
       @user
     end
