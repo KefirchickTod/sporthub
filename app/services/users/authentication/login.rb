@@ -4,8 +4,8 @@ module Users
       class InvalidPassword < ServiceException
       end
 
-      def initialize(params, session)
-        @params = validates(params)
+      def initialize(params, session = nil)
+        @params = params
         @confirmation_service = Users::Authentication::Confirmation.new(params)
 
         @session = session
@@ -16,16 +16,20 @@ module Users
       def call
         @user = find(@params[:email], @params[:password])
 
-        if defined?(@session)
-          @session[:user] = @user.id
-        end
-
+        write_to_session(@user.id)
         # puts @user.confirmed?, confirmation?
 
         @user
       end
 
       private
+
+      # Write user id to session
+      def write_to_session(id)
+        if @session
+          @session[:user] = id #todo init symbol :user as global constant
+        end
+      end
 
       # Was user get confirmation email?
       # If false, show notice error
@@ -41,16 +45,10 @@ module Users
       def find(email, password)
         user = User.find_by(email: email)
 
-        raise "Incorrect email" unless user.present?
+        raise ServiceException.new("Incorrect email") unless user.present?
         raise InvalidPassword.new("Invalid password") unless user.authenticate(password)
 
         user
-      end
-
-      # Get validated params
-      # @return[ActionController]
-      def validates(p)
-        p.require(:user).permit(:email, :password)
       end
     end
   end

@@ -2,7 +2,7 @@ module Articles
   class Create < Service
     # @param[ActionController]
     # @param[Integer]
-    def initialize(params, user_id, image)
+    def initialize(params, user_id, image = nil)
       @params = params
       @user_id = user_id
       @image = image
@@ -21,7 +21,7 @@ module Articles
 
       raise ServiceException.new(article.errors.full_messages.to_sentence) unless article.save
 
-      article.image.attach(@image)
+      article.image.attach(@image) if @image
 
       article
     end

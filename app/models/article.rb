@@ -27,5 +27,18 @@ class Article < ApplicationRecord
     def all_public
       Article.where("is_public = 1").to_a
     end
+
+    def most_popular
+      # todo: Search most popular articles
+    end
+
+    def most_commented
+      # todo: Search most commented articles
+    end
+
+    def best_of_day
+      # todo: Search article from current day and get best photo
+    end
+
   end
 end

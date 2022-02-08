@@ -10,7 +10,7 @@ class Authentication::RegistrationsController < Authentication::AuthenticationCo
   # Create new user by service
   # POST /user
   def create
-    register = Users::Authentication::Register.new(params, session)
+    register = Users::Authentication::Register.new(register_params, session)
 
     # @type[ServiceResponse]
     status = register.run
@@ -24,4 +24,11 @@ class Authentication::RegistrationsController < Authentication::AuthenticationCo
       redirect_to "/", notice: "Please check your email for confirmation instructions"
     end
   end
+
+  private
+
+  def register_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :second_name)
+  end
+
 end

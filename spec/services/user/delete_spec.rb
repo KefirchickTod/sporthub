@@ -5,9 +5,10 @@ describe Users::Delete do
 
   include_context 'users'
 
+  let!(:user) { create(:user) }
   context 'when valid id' do
     let(:id) { user.id }
-    it { expect(subject.call).to raise_error(ServiceException) }
+    it { expect(subject.run.success?).to be_truthy }
   end
 
   context 'when invalid id' do

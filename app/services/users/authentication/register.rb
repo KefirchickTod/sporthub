@@ -4,8 +4,11 @@ module Users
       class BadRegisterParam < ServiceException
       end
 
+      class EmailExistException < ServiceException
+      end
+
       def initialize(params, session)
-        @params = validates(params)
+        @params = params
         @session = session
       end
 
@@ -33,21 +36,21 @@ module Users
       # @raise [BadRegisterParam]
       def create_user
         user = user!
-        raise BadRegisterParam.new("Cant create user, errors: #{user.errors.message}") unless user.save
-
+        raise BadRegisterParam.new("Cant create user, errors: #{user.errors.message}") unless user.valid?
+        user.save
         user
       end
 
+      # Create new user object
+      # If email already exists raise EmailExistException
+      # @raise[EmailExistException]
+      # @return[User]
       def user!
-        raise "Email already exists" if User.find_by(email: @params[:email]).present?
+        raise EmailExistException.new("Email already exists") if User.find_by(email: @params[:email]).present?
 
         User.new(@params)
       end
 
-      # Validate input params from request
-      def validates(p)
-        p.require(:user).permit(:email, :password, :password_confirmation, :first_name)
-      end
     end
   end
 end
