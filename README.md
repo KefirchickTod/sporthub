@@ -44,6 +44,8 @@ For create db diagrams use [DbSchema](https://dbschema.com/download.html)
 
 For each migration(table) need create a seed
 
+![Scheme](db-scheme.png)
+
 # Version
 
 - ruby 3.0.0
