@@ -1,4 +1,6 @@
 module Resources
+  class RouteFindException < StandardError
+  end
   module Resource
     # extend ActiveSupport::Concern
 
