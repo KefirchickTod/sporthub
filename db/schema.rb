@@ -118,6 +118,16 @@ ActiveRecord::Schema.define(version: 20220210112451112) do
     t.index ["title"], name: "index_languages_on_title"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
   create_table "social_network_placements", force: :cascade do |t|
     t.string "title", comment: "Placement for social groups"
     t.datetime "created_at", precision: 6, null: false
@@ -181,8 +191,17 @@ ActiveRecord::Schema.define(version: 20220210112451112) do
     t.datetime "confirmed_at", precision: 6, comment: "Confirmation date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: 6
     t.index ["email"], name: "user_email", unique: true
     t.index ["first_name"], name: "first_name"
+  end
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

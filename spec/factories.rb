@@ -1,11 +1,12 @@
 require "faker"
 FactoryBot.define do
-  factory :social_network_placement, class: 'Social::NetworkPlacement' do
-    
+  factory :role do
   end
 
-  factory :social_network, class: 'Social::Network' do
-    
+  factory :social_network_placement, class: "Social::NetworkPlacement" do
+  end
+
+  factory :social_network, class: "Social::Network" do
   end
 
   factory :footer do
@@ -27,9 +28,14 @@ FactoryBot.define do
   end
 
   factory :country do
+    title { Faker::Address.country }
   end
 
   factory :team do
+    title { Faker::Sports::Football.team }
+    sub_category_id { category.id }
+    country
+    category
   end
 
   factory(:user) do
@@ -42,12 +48,14 @@ FactoryBot.define do
   end
   factory(:article) do
     title { "#{Faker::Book.title}#{rand(0..2523234)}" }
-    short_text { Faker::Lorem.paragraph_by_chars(number: 64, supplemental: false) }
-    full_text { Faker::Lorem.paragraph_by_chars(number: 255, supplemental: false) }
-    is_public { rand(0..1) }
-    default_photo { "https://www.nopcommerce.com/images/thumbs/0005720_coming-soon-page_550.jpeg" }
+    content { Faker::Lorem.paragraph_by_chars(number: 64, supplemental: false) }
+    caption { Faker::Lorem.paragraph_by_chars(number: 255, supplemental: false) }
+    is_public { true }
+    show_comment { true }
     # users_id: @users.sample.id,
     category
     user
+    team
+    country
   end
 end

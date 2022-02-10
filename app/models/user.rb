@@ -4,6 +4,7 @@ class User < ApplicationRecord
   MAILER_FROM_EMAIL = "no-reply@example.com"
 
   # Include block
+  rolify
   has_secure_password
 
   # Virtus
@@ -16,13 +17,15 @@ class User < ApplicationRecord
 
   before_save :downcase_email
   before_destroy :remove_all_relations
+  after_create :assign_default_role
 
   # Validate block
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email" }
-  validates :password, presence: true, length: { minimum: 8, maximum: 128 }, on: :create
+  validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email"}
+  validates :password, presence: true, length: {minimum: 8, maximum: 128}, on: :create
 
-  has_many :articles, primary_key: 'id', foreign_key: "users_id"
+  has_many :articles, primary_key: "id", foreign_key: "users_id"
   has_one_attached :image, dependent: :destroy
+  has_and_belongs_to_many :teams
 
   # Set user confirm
   def confirm!
@@ -34,6 +37,7 @@ class User < ApplicationRecord
     confirmed_at.present?
   end
 
+  # Generate toker for send in mail ad cofirm user
   def generate_confirmation_token
     signed_id expires_in: CONFIRMATION_TOKEN_EXPIRATION, purpose: :confirm_email
   end
@@ -45,6 +49,14 @@ class User < ApplicationRecord
   def send_confirmation_email!
     confirmation_token = generate_confirmation_token
     UserMailer.confirmation(self, confirmation_token).deliver_now
+  end
+
+  # Get all user role name
+  # @return[String]
+  def role_list
+    return "" if roles.empty?
+
+    roles.map { |role| role.name }.join(", ")
   end
 
   # Get user full name
@@ -65,10 +77,16 @@ class User < ApplicationRecord
     UserMailer.password_reset(self, password_reset_token).deliver_now
   end
 
+  # Remove all relations
   def remove_all_relations
     articles.each do |article|
       article.delete
     end
+  end
+
+  # Check if current user is admin
+  def admin?
+    has_role(:admin)
   end
 
   private
@@ -78,4 +96,13 @@ class User < ApplicationRecord
     self.email = email.downcase
   end
 
+  # After register set default role :newuser
+  def assign_default_role
+    add_role(:newuser) if roles.blank?
+  end
+
+  # Add for current user role admin
+  def assign_admin_role
+    add_role(:admin)
+  end
 end

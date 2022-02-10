@@ -19,7 +19,14 @@
             <tr>
                 <td><%= article.id %></td>
 
-                <td><%= image_tag article.image, style: 'width: 250px', loading: 'lazy', decoding: 'async' %></td>
+                <td>
+                    <% if article.image.attached? %>
+                        <%= image_tag article.image, style: 'width: 250px', loading: 'lazy', decoding: 'async' %>
+                    <% else %>
+                        No image
+                    <% end %>
+                </td>
+
                 <td><%= article.title %></td>
                 <td><%= article.category.title %></td>
                 <td><%= article.is_public %></td>

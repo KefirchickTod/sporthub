@@ -34,7 +34,7 @@ module Admin
 
     # POST /admin/article
     def update
-      @article = Articles::Update.new(article_params).call
+      @article = Articles::Update.new(article_params, params[:id]).call
       redirect_to admin_article_url
     end
 
@@ -48,14 +48,16 @@ module Admin
 
     def article_params
       params.require(:article).permit(
-        :title,
-        :full_text,
-        :short_text,
+        :image,
         :categories_id,
+        :teams_id,
+        :countries_id,
+        :title,
+        :caption,
+        :content,
         :is_public,
-        :images
+        :show_comment
       )
     end
-
   end
 end

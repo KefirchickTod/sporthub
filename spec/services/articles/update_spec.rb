@@ -1,9 +1,9 @@
 require "rails_helper"
 
 describe Articles::Update do
-  subject { described_class.new(params) }
+  subject { described_class.new(params, id) }
 
-  include_context 'articles'
+  include_context "articles"
 
   context "when params is valid" do
     let(:id) { article.id }
@@ -14,5 +14,4 @@ describe Articles::Update do
     let(:id) { 100599100599 }
     it { expect(subject.run.error?).to be_truthy }
   end
-
 end

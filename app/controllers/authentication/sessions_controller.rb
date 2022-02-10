@@ -3,7 +3,7 @@ class Authentication::SessionsController < Authentication::AuthenticationControl
 
   # Validates data from log in form
   def create
-    login = Users::Authentication::Login.new(params, session)
+    login = Users::Authentication::Login.new(user_params, session)
 
     @user = login.call
   rescue Users::Authentication::Login::InvalidPassword => e
@@ -21,5 +21,11 @@ class Authentication::SessionsController < Authentication::AuthenticationControl
   # Show page for log in
   def new
     @user = User.new
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :password)
   end
 end

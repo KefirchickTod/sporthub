@@ -27,7 +27,7 @@ module Users
       # Write user id to session
       def write_to_session(id)
         if @session
-          @session[:user] = id #todo init symbol :user as global constant
+          @session[:user] = id # todo init symbol :user as global constant
         end
       end
 
@@ -44,7 +44,7 @@ module Users
       # @return[User]
       def find(email, password)
         user = User.find_by(email: email)
-
+        puts "\nEmail: #{email}"
         raise ServiceException.new("Incorrect email") unless user.present?
         raise InvalidPassword.new("Invalid password") unless user.authenticate(password)
 

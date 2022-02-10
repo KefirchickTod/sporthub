@@ -52,7 +52,10 @@ gem "sassc-rails"
 gem "virtus"
 
 # Fact pagination gem [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 5.10' # omit patch digit
+gem "pagy", "~> 5.10" # omit patch digit
+
+# Very simple Roles library without any authorization enforcement supporting scope on resource object. [https://github.com/RolifyCommunity/rolify]
+gem "rolify"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
