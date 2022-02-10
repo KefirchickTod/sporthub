@@ -11,6 +11,7 @@ class Article < ApplicationRecord
   # Relationship
   belongs_to :category, foreign_key: "categories_id", primary_key: "id", optional: true # Why?
   belongs_to :user, foreign_key: "users_id", primary_key: "id", optional: true
+  #belongs_to :country, foreign_key: "country"
   has_one_attached :image, dependent: :destroy
 
   # Validate

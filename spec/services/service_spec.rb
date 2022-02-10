@@ -1,24 +1,38 @@
 require 'rails_helper'
 
-RSpec.describe Service do
-  it "should run the service" do
-    service = object_double(Service.new, call: true)
+describe Service do
+  subject { described_class.new }
 
-    allow(service).to receive(:run) {
-      ServiceResponse.new(true, data: nil)
-    }
-    expect(service.call).to eq(true)
+  let(:success) { ServiceResponse.new(true, data: nil) }
 
-    status = service.run
+  context 'when success done' do
+    it 'should run service' do
+      service = object_double(subject, call: true)
 
-    expect(status).to be_a_kind_of(ServiceResponse)
-    expect(status.success?).to eq(true)
+      allow(service).to receive(:run).and_return(success)
+
+      expect(service.run).to be_a_kind_of(ServiceResponse)
+      expect(service.run.success?).to be_truthy
+
+    end
   end
 
-  it "should raise an error if not implemented method call" do
-    service = Service.new
+  # context 'when service get raise error' do
+  #  it 'should raise error' do
+  #    service = double(subject, call: true, run: true )
 
-    expect { service.call }.to raise_error("This method is not implemented")
-    # expect(service.call).to eq(false)
+  #    allow(service).to receive(:call) {
+  #      raise ServiceException.new("Error")
+  #    }
+
+  #    expect { service.call }.to raise_error(ServiceException)
+  #    expect(service.run.error?).to be_truthy
+
+  #  end
+  #end
+
+  context 'when service method not implemented' do
+    it { expect { subject.call }.to raise_error("This method is not implemented") }
   end
+
 end

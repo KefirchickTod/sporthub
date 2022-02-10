@@ -4,6 +4,9 @@ class CreateComments < ActiveRecord::Migration[7.0]
 
       t.text :text, null: false, comment: "Comment content"
       t.integer :parent_id, comment: "Is comment sub?"
+      t.integer :liked, default: 0, comment: "Count of like"
+      t.integer :disliked, default: 0, comment: "Count of dislike"
+      t.boolean :edited, default: false, comment: "Was edit comment"
 
       t.timestamps
 

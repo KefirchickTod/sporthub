@@ -1,19 +1,22 @@
 class CreateArticles < ActiveRecord::Migration[7.0]
   def change
     create_table :articles do |t|
-      t.string :title, index: {unique: true, name: "article_title"}
+      t.string :title, index: { unique: true, name: "article_title" }
 
-      t.text :full_text, comment: "Main content of articles"
-      t.string :short_text, comment: "Short content of articles"
-      t.string :default_photo, comment: "Main photo in site and seo output"
+      t.text :content, comment: "Article content"
+      t.string :caption, index: true
 
-      t.integer :is_public, default: 1, limit: 2, comment: "Check if public"
+      t.boolean :show_comment, default: true
+      t.boolean :is_public, default: true, comment: "Check if public"
 
       t.timestamps
 
       # Relationship
-      t.references :categories, index: true, foreign_key: true
-      t.references :users, index: true, foreign_key: true
+      #t.references :categories, index: true, foreign_key: true
+      #t.references :users, index: true, foreign_key: true
+      #t.references :teams, index: true, foreign_key: true
+      #t.references :countries, index: true, foreign_key: true, comment: "Article location"
+
     end
   end
 end

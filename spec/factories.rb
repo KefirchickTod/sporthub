@@ -1,17 +1,36 @@
-require 'faker'
+require "faker"
 FactoryBot.define do
-  factory :user_team do
+  factory :social_network_placement, class: 'Social::NetworkPlacement' do
     
   end
 
-  factory :team do
+  factory :social_network, class: 'Social::Network' do
     
+  end
+
+  factory :footer do
   end
 
   factory :banner do
-    
   end
 
+  factory :language do
+  end
+
+  factory :survey_answer do
+  end
+
+  factory :survey_option do
+  end
+
+  factory :survey do
+  end
+
+  factory :country do
+  end
+
+  factory :team do
+  end
 
   factory(:user) do
     first_name { Faker::Internet.email }
@@ -31,5 +50,4 @@ FactoryBot.define do
     category
     user
   end
-
 end

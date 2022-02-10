@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_122129) do
+ActiveRecord::Schema.define(version: 20220210112451112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,17 +45,34 @@ ActiveRecord::Schema.define(version: 2022_02_09_122129) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
-    t.text "full_text", comment: "Main content of articles"
-    t.string "short_text", comment: "Short content of articles"
-    t.string "default_photo", comment: "Main photo in site and seo output"
-    t.integer "is_public", limit: 2, default: 1, comment: "Check if public"
+    t.text "content", comment: "Article content"
+    t.string "caption"
+    t.boolean "show_comment", default: true
+    t.boolean "is_public", default: true, comment: "Check if public"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "categories_id"
     t.bigint "users_id"
+    t.bigint "teams_id"
+    t.bigint "countries_id", comment: "Article location"
+    t.index ["caption"], name: "index_articles_on_caption"
     t.index ["categories_id"], name: "index_articles_on_categories_id"
+    t.index ["countries_id"], name: "index_articles_on_countries_id"
+    t.index ["teams_id"], name: "index_articles_on_teams_id"
     t.index ["title"], name: "article_title", unique: true
     t.index ["users_id"], name: "index_articles_on_users_id"
+  end
+
+  create_table "banners", force: :cascade do |t|
+    t.string "title"
+    t.integer "status", limit: 2, default: 0
+    t.bigint "publish_in_id"
+    t.bigint "languages_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["languages_id"], name: "index_banners_on_languages_id"
+    t.index ["publish_in_id"], name: "index_banners_on_publish_in_id"
+    t.index ["title"], name: "index_banners_on_title"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -69,6 +86,9 @@ ActiveRecord::Schema.define(version: 2022_02_09_122129) do
   create_table "comments", force: :cascade do |t|
     t.text "text", null: false, comment: "Comment content"
     t.integer "parent_id", comment: "Is comment sub?"
+    t.integer "liked", default: 0, comment: "Count of like"
+    t.integer "disliked", default: 0, comment: "Count of dislike"
+    t.boolean "edited", default: false, comment: "Was edit comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
@@ -77,24 +97,80 @@ ActiveRecord::Schema.define(version: 2022_02_09_122129) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "teams", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.string "location"
-    t.bigint "categories_id"
-    t.bigint "author_id"
+  create_table "countries", force: :cascade do |t|
+    t.string "title", comment: "Country name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_id"], name: "index_teams_on_author_id"
-    t.index ["categories_id"], name: "index_teams_on_categories_id"
-    t.index ["title"], name: "index_teams_on_title"
+    t.index ["title"], name: "index_countries_on_title"
   end
 
-  create_table "user_teams", force: :cascade do |t|
-    t.bigint "teams_id"
+  create_table "footers", force: :cascade do |t|
+    t.string "title"
+    t.boolean "show", default: true, comment: "Hide/show"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_footers_on_title"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "title"
+    t.boolean "status", comment: "Switch off/on"
+    t.index ["title"], name: "index_languages_on_title"
+  end
+
+  create_table "social_network_placements", force: :cascade do |t|
+    t.string "title", comment: "Placement for social groups"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "social_networks", force: :cascade do |t|
+    t.string "title", comment: "Name of socail network"
+    t.string "api", comment: "For save api from social network"
+    t.bigint "social_network_placements_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["social_network_placements_id"], name: "index_social_networks_on_social_network_placements_id"
+  end
+
+  create_table "survey_answers", force: :cascade do |t|
     t.bigint "users_id"
-    t.index ["teams_id"], name: "index_user_teams_on_teams_id"
-    t.index ["users_id"], name: "index_user_teams_on_users_id"
+    t.bigint "survey_options_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["survey_options_id"], name: "index_survey_answers_on_survey_options_id"
+    t.index ["users_id"], name: "index_survey_answers_on_users_id"
+  end
+
+  create_table "survey_options", force: :cascade do |t|
+    t.string "answer", null: false
+    t.bigint "surveys_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["surveys_id"], name: "index_survey_options_on_surveys_id"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string "question", comment: "Main question"
+    t.datetime "active_from", precision: 6, comment: "Date of start show survey"
+    t.datetime "active_to", precision: 6, comment: "Date of end show surveys and change status to archived"
+    t.integer "status", limit: 2, default: 0, comment: "Check if current survey is open or other sattus"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question"], name: "index_surveys_on_question"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "sub_category_id"
+    t.bigint "categories_id"
+    t.bigint "countries_id"
+    t.index ["categories_id"], name: "index_teams_on_categories_id"
+    t.index ["countries_id"], name: "index_teams_on_countries_id"
+    t.index ["sub_category_id"], name: "index_teams_on_sub_category_id"
+    t.index ["title"], name: "index_teams_on_title"
   end
 
   create_table "users", force: :cascade do |t|
@@ -102,27 +178,24 @@ ActiveRecord::Schema.define(version: 2022_02_09_122129) do
     t.string "password_digest", null: false
     t.string "first_name", null: false
     t.string "second_name"
+    t.datetime "confirmed_at", precision: 6, comment: "Confirmation date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "confirmed_at", precision: 6
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: 6
-    t.datetime "remember_created_at", precision: 6
-    t.integer "role", default: 0
     t.index ["email"], name: "user_email", unique: true
     t.index ["first_name"], name: "first_name"
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "categories", column: "categories_id"
+  add_foreign_key "articles", "countries", column: "countries_id"
+  add_foreign_key "articles", "teams", column: "teams_id"
   add_foreign_key "articles", "users", column: "users_id"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
+  add_foreign_key "social_networks", "social_network_placements", column: "social_network_placements_id"
+  add_foreign_key "survey_options", "surveys", column: "surveys_id"
   add_foreign_key "teams", "categories", column: "categories_id"
-  add_foreign_key "teams", "users", column: "author_id"
-  add_foreign_key "user_teams", "teams", column: "teams_id"
-  add_foreign_key "user_teams", "users", column: "users_id"
+  add_foreign_key "teams", "categories", column: "sub_category_id"
+  add_foreign_key "teams", "countries", column: "countries_id"
 end
