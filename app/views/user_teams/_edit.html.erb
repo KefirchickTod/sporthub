@@ -1,0 +1,14 @@
+<div class="container">
+    <%= form_with(model: @user, url: user_team_url, method: :patch) do |form| %>
+        <div class="form-group">
+            <%= form.label :teams, "Teams", class: 'form-label' %>
+
+            <%= form.select(:teams, Team.collect_select.map { |p| [p.title, p.id] },
+                    { :prompt => "Please select" },
+                    { :multiple => true, :size => 5 }) %>
+        </div>
+        <div class="form-group">
+            <%= form.submit 'Update', class: 'btn btn-success' %>
+        </div>
+    <% end %>
+</div>

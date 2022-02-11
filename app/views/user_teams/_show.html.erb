@@ -1,0 +1,33 @@
+<%= render 'user_teams/edit' %>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Logo</th>
+            <th>Team</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for team in @user.teams do %>
+            <tr>
+                <td>
+                    <% if team.image.attached? %>
+                        <%= image_tag team.image, style: 'width: 250px', loading: 'lazy', decoding: 'async' %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= team.title %>
+                </td>
+                <td>
+                    <div class="d-flex flex-column">
+                        <%= button_to 'Trash', user_team_delete_path(team.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+
+    </table>
+</div>

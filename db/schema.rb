@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 20220210112451112) do
     t.index ["title"], name: "index_banners_on_title"
   end
 
+  create_table "banners_languages", id: false, force: :cascade do |t|
+    t.bigint "banner_id", null: false
+    t.bigint "language_id", null: false
+    t.index ["banner_id", "language_id"], name: "index_banners_languages_on_banner_id_and_language_id"
+    t.index ["language_id", "banner_id"], name: "index_banners_languages_on_language_id_and_banner_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "title", null: false, comment: "Main title of category"
     t.integer "parent_id", comment: "Parent id of category"

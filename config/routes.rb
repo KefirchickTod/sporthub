@@ -27,4 +27,6 @@ Rails.application.routes.draw do
 
   resource :users, except: %i[new create]
   resources :articles
+  resource :user_team, only: %i[edit update show]
+  delete "/user_teams/:id/delete", to: "user_teams#destroy", as: "user_team_delete"
 end
