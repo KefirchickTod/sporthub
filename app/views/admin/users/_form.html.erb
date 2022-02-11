@@ -10,7 +10,10 @@
     <%= form.label :second_name, 'Second name', class: "form-label" %>
     <%= form.text_field :second_name, class: 'form-control form-control-lg', required: true %>
 </div>
-
+<div class="form-group">
+    <%= form.label :role, 'Role', class: "form-label" %>
+    <%= form.collection_select :role, Role.all, :id, :name, class: 'form-control form-control-lg', required: true, include_blank: true %>
+</div>
 <div class="form-group">
     <%= form.submit 'Create', class: 'btn btn-success' %>
 </div>

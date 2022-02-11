@@ -1,0 +1,25 @@
+<div class="form-group">
+    <%= form.label :categories_id, 'Subcategory', class: "form-label" %>
+    <%= form.collection_select :categories_id, categories, :id, :title, class: 'form-control form-control-lg', required: true %>
+</div>
+<div class="form-group">
+    <%= form.label :categories_id, 'Category', class: "form-label" %>
+    <%= form.collection_select :teams_id, Team.all, :id, :title, class: 'form-control form-control-lg' %>
+</div>
+<div class="form-group">
+    <%= form.label :countries_id, 'Location', class: "form-label" %>
+    <%= form.collection_select :countries_id, Country.all, :id, :title, class: 'form-control form-control-lg' %>
+</div>
+<div class="form-group">
+    <%= form.label :title, 'Team', class: "form-label" %>
+    <%= form.text_field :title, class: 'form-control form-control-lg', required: true %>
+</div>
+
+<div class="form-group">
+    <%= form.label :image, 'Logo', class: "form-label" %>
+    <%= form.file_field :image, class: 'form-control form-control-lg', required: true %>
+</div>
+
+<div class="form-group">
+    <%= form.submit 'Create', class: 'btn btn-success' %>
+</div>

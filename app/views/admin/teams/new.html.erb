@@ -1,0 +1,6 @@
+<div class="container">
+    <%= form_with(model: @team, url: admin_teams_url, method: :post) do |form| %>
+
+        <%= render 'admin/teams/form', form: form, categories: Category.all %>
+    <% end %>
+</div>

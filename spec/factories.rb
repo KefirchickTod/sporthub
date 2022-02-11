@@ -1,6 +1,7 @@
 require "faker"
 FactoryBot.define do
   factory :role do
+    name { Faker::ProgrammingLanguage.name }
   end
 
   factory :social_network_placement, class: "Social::NetworkPlacement" do

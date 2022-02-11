@@ -1,0 +1,21 @@
+<div class="container">
+    <%= form_with(model: @team, url: admin_team_url(@team.id), method: :patch) do |form| %>
+
+        <% if @team.errors.any? %>
+            <div style="color: red">
+                <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                <ul>
+                    <% @team.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <% if @team.image.attached? %>
+            <%= image_tag @team.image, style: 'width: 250px', loading: 'lazy', decoding: 'async' %>
+
+        <% end %>
+        <%= render 'admin/teams/form', form: form, categories: Category.all %>
+    <% end %>
+</div>

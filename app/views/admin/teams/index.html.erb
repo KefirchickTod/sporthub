@@ -1,0 +1,48 @@
+<div class="container">
+    <%= link_to 'Add', new_admin_team_path, class: 'btn btn-outline-danger' %>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Sub category</th>
+            <th>Country</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for team in @teams do %>
+            <tr>
+                <td><%= team.id %></td>
+
+                <td>
+                    <% if team.image.attached? %>
+                        <%= image_tag team.image, style: 'width: 250px', loading: 'lazy', decoding: 'async' %>
+                    <% else %>
+                        No image
+                    <% end %>
+                </td>
+
+                <td><%= team.title %></td>
+                <td><%= team.category.title %></td>
+                <td><%= team.sub_category.title %></td>
+                <td><%= team.country.title %></td>
+                <td><%= team.created_at %></td>
+                <td><%= team.updated_at %></td>
+                <td>
+                    <div class="d-flex flex-column">
+                        <%= link_to 'Edit', edit_admin_team_path(team.id), class: 'btn btn-success' %>
+                        <%= button_to 'Trash', admin_team_path(team.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+    <%== pagy_bootstrap_nav(@pagy) %>
+</div>

@@ -22,13 +22,13 @@ module Admin
     # POST /admin/user
     def update
       Users::Update.new(params[:id], user_params).call
+      redirect_to admin_users_url
     end
 
     private
 
     def user_params
-      params.require(:user).permit(:email, :first_name, :second_name)
+      params.require(:user).permit(:email, :first_name, :second_name, :role)
     end
-
   end
 end
