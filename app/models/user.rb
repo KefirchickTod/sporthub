@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   has_many :articles, primary_key: "id", foreign_key: "users_id"
   has_one_attached :image, dependent: :destroy
-  has_and_belongs_to_many :teams
+  has_and_belongs_to_many :teams, optional: :destroy
 
   # Set user confirm
   def confirm!

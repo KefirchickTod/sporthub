@@ -148,7 +148,9 @@ ActiveRecord::Schema.define(version: 20220210112451112) do
     t.bigint "survey_options_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "surveys_id"
     t.index ["survey_options_id"], name: "index_survey_answers_on_survey_options_id"
+    t.index ["surveys_id"], name: "index_survey_answers_on_surveys_id"
     t.index ["users_id"], name: "index_survey_answers_on_users_id"
   end
 
