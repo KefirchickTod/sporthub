@@ -111,11 +111,10 @@
     </div>
 <% end %>
 <div class="container-fluid row">
-    <%= render 'include/sidebar' %>
+    <%= render 'include/admin/sidebar' %>
     <div class="content-block col-md-9" id="<%= controller_name %>">
         <%= yield %>
     </div>
 </div>
-<%= render 'include/footer' %>
 </body>
 </html>

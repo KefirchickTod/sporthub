@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-
   # Admin pies of site
   # Define all routes for admin here
   namespace :admin do
     resources :articles
     resources :categories
     resources :users, except: %i[new create]
+    resources :teams
   end
 
   # Sig up and sign in in site routes
@@ -27,6 +27,4 @@ Rails.application.routes.draw do
 
   resource :users, except: %i[new create]
   resources :articles
-
-
 end

@@ -185,6 +185,13 @@ ActiveRecord::Schema.define(version: 20220210112451112) do
     t.index ["title"], name: "index_teams_on_title"
   end
 
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["team_id", "user_id"], name: "index_teams_users_on_team_id_and_user_id"
+    t.index ["user_id", "team_id"], name: "index_teams_users_on_user_id_and_team_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false, comment: "User email and login"
     t.string "password_digest", null: false
@@ -206,6 +213,15 @@ ActiveRecord::Schema.define(version: 20220210112451112) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "users_teams", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_users_teams_on_team_id"
+    t.index ["user_id"], name: "index_users_teams_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "categories", column: "categories_id"
@@ -219,4 +235,6 @@ ActiveRecord::Schema.define(version: 20220210112451112) do
   add_foreign_key "teams", "categories", column: "categories_id"
   add_foreign_key "teams", "categories", column: "sub_category_id"
   add_foreign_key "teams", "countries", column: "countries_id"
+  add_foreign_key "users_teams", "teams"
+  add_foreign_key "users_teams", "users"
 end
