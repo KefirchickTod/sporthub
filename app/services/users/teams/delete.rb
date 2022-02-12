@@ -7,13 +7,7 @@ module Users
       end
 
       def call
-        raise @user.errors.messages if @user.teams.delete(@id)
-      end
-
-      private
-
-      def find_team(id)
-        user.teams.find(id)
+        raise @user.errors.messages unless @user.teams.delete(@id)
       end
     end
   end

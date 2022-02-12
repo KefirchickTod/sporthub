@@ -19,13 +19,19 @@ FactoryBot.define do
   factory :language do
   end
 
+  factory :survey do
+    question { Faker::Games::ElderScrolls.weapon + "?" }
+    active_from { Faker::Date.between(from: Date.today.prev_month, to: Date.today) }
+    active_to { Faker::Date.between(from: Date.today, to: Date.today.next_month) }
+    status { "published" }
+  end
+
   factory :survey_answer do
   end
 
   factory :survey_option do
-  end
-
-  factory :survey do
+    answer { %w[Yes No][rand(0..1)] }
+    survey
   end
 
   factory :country do
