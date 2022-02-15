@@ -1,0 +1,6 @@
+<div class="container">
+    <%= form_with(model: @survey, url: admin_surveys_url, method: :post) do |form| %>
+
+        <%= render 'admin/surveys/form', form: form %>
+    <% end %>
+</div>

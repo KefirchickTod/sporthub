@@ -2,12 +2,11 @@ RSpec.shared_context "survey" do
   let(:question) { Faker::Games::ElderScrolls.weapon + "?" }
   let(:options) do
     [
-      {
-        answer: %w[Yes No][rand(0..1)]
-      },
-      {
-        answer: %w[Yes No][rand(0..1)]
-      }
+
+      %w[Yes No][rand(0..1)],
+
+      %w[Yes No][rand(0..1)]
+
     ]
   end
 
@@ -26,14 +25,16 @@ RSpec.shared_context "survey_options" do
   let!(:survey) { create(:survey) }
   let(:answer) do
     [
-      {
-        answer: %w[Yes No][rand(0..1)]
-      },
-      {
-        answer: %w[Yes No][rand(0..1)]
-      }
+      %w[Yes No][rand(0..1)],
+      %w[Yes No][rand(0..1)]
+
       # surveys_id: survey.id
     ]
   end
   let(:params) { answer }
+end
+
+RSpec.shared_context "survey_answer" do
+  let(:user) { create(:user) }
+  let(:option) { create(:survey_option) }
 end

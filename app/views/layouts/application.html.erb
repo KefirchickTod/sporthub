@@ -116,6 +116,9 @@
         <%= yield %>
     </div>
 </div>
+<% if user_signed_in? && !@survey.nil? %>
+    <%= render 'include/survey', survey: @survey %>
+<% end %>
 <%= render 'include/footer' %>
 </body>
 </html>

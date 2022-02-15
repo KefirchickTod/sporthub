@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     resources :categories
     resources :users, except: %i[new create]
     resources :teams
+    resources :surveys
   end
-
   # Sig up and sign in in site routes
   namespace :authentication do
     resource :registration, only: %i[create new], as: "register"
@@ -29,4 +29,5 @@ Rails.application.routes.draw do
   resources :articles
   resource :user_team, only: %i[edit update show]
   delete "/user_teams/:id/delete", to: "user_teams#destroy", as: "user_team_delete"
+  post "/answer", to: "surveys#create", as: "answer"
 end

@@ -5,5 +5,6 @@ class HomeController < ApplicationController
     @articles = Article.all
     @article = @articles.first
     @categories = Category.all_main
+    @survey = Survey.published.sample
   end
 end

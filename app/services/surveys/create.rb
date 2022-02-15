@@ -13,10 +13,10 @@ module Surveys
 
       raise ServiceException.new(survey.errors.messages) unless survey.save
 
-      begin
+      Survey.transaction do
         save_options(survey, options)
       rescue => e
-        raise ActiveRecord::Rollback
+        raise ActiveRecord::Rollback.new(e.to_s)
       end
 
       survey
@@ -28,7 +28,10 @@ module Surveys
     # @return[Array]
     def get_options
       options = @params[:options]
+      raise ServiceException.new("Cant save survey with empty options") if options.nil? || options.empty?
+
       @params.delete(:options)
+
       options
     end
 

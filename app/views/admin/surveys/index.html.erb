@@ -1,0 +1,32 @@
+<div class="container">
+    <%= link_to 'Add', new_admin_survey_path, class: 'btn btn-outline-danger' %>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Question</th>
+            <th>Status</th>
+            <th>Response</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for survey in @surveys do %>
+            <tr>
+                <td><%= survey.id %></td>
+                <td><%= survey.question %></td>
+                <td><%= survey.status %></td>
+                <td><%= survey.options.first.survey_answers.length %></td>
+                <td>
+                    <div class="d-flex flex-column">
+                        <%= link_to 'Edit', edit_admin_survey_path(survey.id), class: 'btn btn-success' %>
+                        <%= button_to 'Trash', admin_survey_path(survey.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+    <%== pagy_bootstrap_nav(@pagy) %>
+</div>

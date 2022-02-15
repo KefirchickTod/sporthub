@@ -1,0 +1,10 @@
+<div class="col-4 d-flex flex-column justify-content-between" style="position: absolute; top:101%;right: 0; background: navajowhite">
+    <%= form_with(model: SurveyAnswer.new, url: answer_url, method: :post) do |form| %>
+        <h2><%= survey.question %></h2>
+        <% for option in survey.options %>
+            <%= form.label :answer, option.answer, { class: 'label label-form' } %>
+            <%= form.check_box :answer, { class: 'form-control' }, option.id %>
+        <% end %>
+        <%= form.submit 'Answer', class: 'btn btn-success' %>
+    <% end %>
+</div>

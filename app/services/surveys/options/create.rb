@@ -21,11 +21,13 @@ module Surveys
       end
 
       def call
-        raise EmptyOptionsException.new("Cant save survey with empty options") if @params.empty?
+        raise EmptyOptionsException.new("Cant save survey with empty options") if @params.nil? || @params.empty?
 
         @params.each do |option|
-          option[:surveys_id] = survey_id
-          SurveyOption.create(option)
+          SurveyOption.create(
+            surveys_id: survey_id,
+            answer: option
+          )
         rescue => e
           raise ServiceException.new(e.to_s)
         end
