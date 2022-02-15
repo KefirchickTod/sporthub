@@ -1,8 +1,7 @@
 module Authentication
   class PasswordsController < Authentication::AuthenticationController
-
-    rescue_from Users::Authentication::Password::TokenExpiredException, with: :standard_error
-    rescue_from Users::Authentication::Password::ConfirmationError, with: :standard_error
+    # rescue_from Users::Authentication::Password::TokenExpiredException, with: :standard_error
+    # rescue_from Users::Authentication::Password::ConfirmationError, with: :standard_error
 
     def create
       Users::Authentication::Password::CreatorPasswordResetSender.new(create_password_params).call
@@ -42,7 +41,5 @@ module Authentication
     def create_password_params
       params.require(:user).permit(:email)[:email]
     end
-
   end
 end
-

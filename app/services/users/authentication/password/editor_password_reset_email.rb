@@ -1,8 +1,7 @@
 module Users
   module Authentication
     module Password
-      class TokenExpiredException < ServiceException
-      end
+      class TokenExpiredException < ServiceException; end
 
       class EditorPasswordResetEmail < Service
         def initialize(password_reset_token)
