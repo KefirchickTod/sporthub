@@ -8,14 +8,14 @@ require "faker"
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+#  social_network_placements
+#   social_networks
 ROOT = "#{Rails.root}/db/seeders/"
 DIRS = %w[
-  user
+  users
   categories
   countries
   teams
-  social_network_placements
-  social_networks
   article
   surveys
   survey_options

@@ -1,4 +1,4 @@
-Social::NetworkPlacement.delete_all
+# Social::NetworkPlacement.delete_all
 
 Social::NetworkPlacement.create(
   title: "share"
