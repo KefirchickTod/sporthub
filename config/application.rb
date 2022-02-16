@@ -6,6 +6,9 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Load .env
+Dotenv::Railtie.load
+
 module Sporthub
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -15,8 +18,8 @@ module Sporthub
     config.autoload_paths << "#{Rails.root}/app/services"
 
     # Add locales list to i18n languages
-    config.i18n.available_locales = %i[en ua]
-    config.i18n.default_locale = :ua
+    config.i18n.available_locales = %i[en uk]
+    config.i18n.default_locale = :uk
 
     # Configuration for the application, engines, and railties goes here.
     #
