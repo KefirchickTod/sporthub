@@ -37,4 +37,8 @@ class Article < ApplicationRecord
       # todo: Search article from current day and get best photo
     end
   end
+
+  def long_created_at
+    l created_at, format: :long
+  end
 end

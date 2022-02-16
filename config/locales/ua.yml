@@ -1,0 +1,16 @@
+ua:
+  activerecord:
+    attributes:
+      article:
+        title: 'Заголовок'
+        caption: 'Заголовк2'
+        content: 'Контетн'
+        is_public: 'Чи поблукувати'
+        show_comment: 'Чи показувати коментарі'
+  layouts:
+    application:
+      logout: 'Вихід'
+      login: 'Вхід'
+      signup: 'Реєстрація'
+
+  hello: "Hello world"

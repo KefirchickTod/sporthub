@@ -11,7 +11,12 @@ module Sporthub
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # Initialize autoload for services
     config.autoload_paths << "#{Rails.root}/app/services"
+
+    # Add locales list to i18n languages
+    config.i18n.available_locales = %i[en ua]
+    config.i18n.default_locale = :ua
 
     # Configuration for the application, engines, and railties goes here.
     #

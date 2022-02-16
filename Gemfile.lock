@@ -101,6 +101,10 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     digest (3.1.0-java)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
@@ -109,6 +113,31 @@ GEM
       railties (>= 5.0.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
+    faraday (1.9.3)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0)
+      faraday-multipart (~> 1.0)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.0)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      faraday-retry (~> 1.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-multipart (1.0.3)
+      multipart-post (>= 1.2, < 3)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    faraday-retry (1.0.3)
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
     ffi (1.15.5)
     ffi (1.15.5-java)
     ffi (1.15.5-x64-mingw32)
@@ -128,6 +157,13 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json (2.6.1)
+    json (2.6.1-java)
+    lokalise_manager (2.1.0)
+      ruby-lokalise-api (~> 4.0)
+      rubyzip (~> 2.3)
+    lokalise_rails (4.0.0)
+      lokalise_manager (~> 2.0)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -141,6 +177,7 @@ GEM
     minitest (5.15.0)
     msgpack (1.4.2)
     msgpack (1.4.2-java)
+    multipart-post (2.1.1)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -203,6 +240,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails-i18n (7.0.2)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.0.1)
       actionpack (= 7.0.1)
       activesupport (= 7.0.1)
@@ -234,6 +274,12 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.3)
+    ruby-lokalise-api (4.5.1)
+      addressable (~> 2.5)
+      faraday (~> 1.0)
+      faraday_middleware (~> 1.0)
+      json (>= 1.8.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -310,14 +356,17 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  dotenv-rails
   factory_bot_rails
   faker
   importmap-rails
   jbuilder
+  lokalise_rails
   pagy (~> 5.10)
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.1)
+  rails-i18n (~> 7.0.0)
   rolify
   rspec-rails
   sassc-rails

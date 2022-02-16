@@ -60,12 +60,21 @@ gem "rolify"
 # Simple, efficient background processing for Ruby [https://github.com/mperham/sidekiq]
 gem "sidekiq"
 
+# Centralization of locale data collection for Ruby on Rails. [https://github.com/svenfuchs/rails-i18n]
+gem "rails-i18n", "~> 7.0.0"
+
+# This gem provides Lokalise integration for Ruby on Rails and allows to exchange translation files easily.[https://github.com/bodrovis/lokalise_rails]
+gem "lokalise_rails"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
 
   gem "rspec-rails"
   gem "factory_bot_rails"
+
+  # Shim to load environment variables from .env into ENV in development. [https://github.com/bkeepers/dotenv]
+  gem "dotenv-rails"
 end
 
 group :development do
