@@ -34,7 +34,6 @@ module Admin
 
     def surveys_params
       surveys = params.require(:survey)
-
       {
         options: surveys[:options]
       }.merge!(surveys.permit(:question, :active_from, :active_to))

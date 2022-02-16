@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   # GET /
   def index
     @articles = Article.all
-    @article = @articles.first.is_a?(Article) ? @article.first : Article.new
+    @article = @articles.first
     @categories = Category.all_main
     @survey = Survey.published.sample
   end

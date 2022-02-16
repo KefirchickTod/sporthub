@@ -160,6 +160,7 @@
                 <div class="on-hover-shadow card flex-md-row border rounded-0">
                     <% if !@article.nil? &&  @article.image.attached? %>
                         <%= image_tag @article.image, {style:"min-width: 150px; height: 98px;",class: "card-img-right flex-auto d-none d-md-block p-1"} %>
+
                     <% else %>
                         <%= image_tag 'article_image.jpg', {style:"min-width: 150px; height: 98px;",class: "card-img-right flex-auto d-none d-md-block p-1"} %>
                     <% end %>

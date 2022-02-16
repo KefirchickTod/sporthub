@@ -56,7 +56,7 @@ class User < ApplicationRecord
   def role_list
     return "" if roles.empty?
 
-    roles.map { |role| role.name }.join(", ")
+    roles.map(&:name).join(", ")
   end
 
   # Get user full name

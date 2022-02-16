@@ -10,6 +10,10 @@ require "faker"
 
 #  social_network_placements
 #   social_networks
+# TODO(i18n)
+# TODO(rake): !try rake task to generate pdf and !important background job, carryupload, and state machines
+# TODO(service): interactor, trailerbalser, dry-rb (interface manager)
+
 ROOT = "#{Rails.root}/db/seeders/"
 DIRS = %w[
   users

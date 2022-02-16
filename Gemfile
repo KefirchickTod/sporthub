@@ -57,6 +57,9 @@ gem "pagy", "~> 5.10" # omit patch digit
 # Very simple Roles library without any authorization enforcement supporting scope on resource object. [https://github.com/RolifyCommunity/rolify]
 gem "rolify"
 
+# Simple, efficient background processing for Ruby [https://github.com/mperham/sidekiq]
+gem "sidekiq"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
