@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  # TODO(subscribes): If user subscribes to team current articles and current article changing status(state) to published, create mail to user
+
   # Virtus
   # include Virtus.model
   attribute :title, :string
@@ -23,6 +25,12 @@ class Article < ApplicationRecord
 
   scope :all_public, -> { where("is_public = 1") }
 
+  # state_machine :is_public, initial: :published do
+  #  event :published do
+  #    # Todo send email
+  #  end
+  # end
+
   # Singleton
   class << self
     def most_popular
@@ -39,6 +47,6 @@ class Article < ApplicationRecord
   end
 
   def long_created_at
-    l created_at, format: :long
+    # l created_at, format: :long
   end
 end

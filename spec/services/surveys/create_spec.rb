@@ -16,6 +16,6 @@ describe Surveys::Create do
 
   context "when empty options" do
     let(:options) { [] }
-    it { expect { subject.call }.to raise_error(ActiveRecord::Rollback) }
+    it { expect { subject.call }.to raise_error(ServiceException) }
   end
 end

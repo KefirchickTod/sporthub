@@ -66,6 +66,17 @@ gem "rails-i18n", "~> 7.0.0"
 # This gem provides Lokalise integration for Ruby on Rails and allows to exchange translation files easily.[https://github.com/bodrovis/lokalise_rails]
 gem "lokalise_rails"
 
+# Pundit provides a set of helpers which guide you in leveraging regular Ruby classes and object oriented design patterns to build a simple,
+# robust and scalable authorization system.
+gem "pundit"
+
+# State Machines adds support for creating state machines for attributes on any Ruby class.[https://github.com/state-machines/state_machines]
+gem "state_machines"
+
+# A PDF generation plugin for Ruby on Rails [https://github.com/mileszs/wicked_pdf]
+gem "wicked_pdf"
+gem "wkhtmltopdf-binary"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]

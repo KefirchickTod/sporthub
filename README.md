@@ -60,6 +60,23 @@ rails s -p 3001
 npm run-script build:css
 ```
 
+# I18n
+
+For crete translate are using service [lokalise](https://app.lokalise.com/)
+You need add integration with gem ``lokalise_rails`` and create own .env file
+
+After integration api and project id, run command:
+
+```bash
+rails lokalise_rails:export
+```
+
+After done Translation, use:
+```bash
+rails lokalise_rails:import
+```
+or download file from service
+
 # Authors
 
 - [Kefirchick](mailto:zacharpu2@gmail.com?subject=[GitHub]%20Source%20Han%20Sans)

@@ -5,6 +5,12 @@ module Admin
     # GET /admin/article
     def index
       @pagy, @articles = pagy(Article.all)
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: "article"
+        end
+      end
     end
 
     # GET /admin/article/:id
