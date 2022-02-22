@@ -1,4 +1,9 @@
+require "sidekiq/web"
+# require "sidekiq/cron/web"
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     # Admin pies of site
     # Define all routes for admin here

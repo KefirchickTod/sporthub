@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20220210112451112) do
     t.bigint "users_id"
     t.bigint "teams_id"
     t.bigint "countries_id", comment: "Article location"
+    t.string "aasm_state"
     t.index ["caption"], name: "index_articles_on_caption"
     t.index ["categories_id"], name: "index_articles_on_categories_id"
     t.index ["countries_id"], name: "index_articles_on_countries_id"

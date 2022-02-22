@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_one_attached :image, dependent: :destroy
   has_and_belongs_to_many :teams, optional: :destroy
 
+  scope :admins, -> { joins(:roles).where("name = 'admin'") }
+
   # Set user confirm
   def confirm!
     update_columns(confirmed_at: Time.current)

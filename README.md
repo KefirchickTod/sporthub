@@ -77,6 +77,19 @@ rails lokalise_rails:import
 ```
 or download file from service
 
+#Sidekiq
+
+[Instruction](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04-ru) for install redis 
+
+Connect to redis service
+
+Run ``rails c`` <br>
+Run in rails console ``Sidekiq.redis {|c| c.inspect}`` <br>
+Output must be like ``"#<Redis client v4.6.0 for redis://127.0.0.1:6379/0>"``<br>
+Open new console and run ``REDIS_URL="redis://127.0.0.1:6379/0" bundle exec sidekiq -e development -C config/sidekiq.yml``<br>
+<h3>Important ulr must be the same</h3> 
+
+
 # Authors
 
 - [Kefirchick](mailto:zacharpu2@gmail.com?subject=[GitHub]%20Source%20Han%20Sans)

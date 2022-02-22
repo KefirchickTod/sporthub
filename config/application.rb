@@ -21,6 +21,9 @@ module Sporthub
     config.i18n.available_locales = %i[en uk]
     config.i18n.default_locale = :uk
 
+    # Set sidekiq for queue adapter
+    config.active_job.queue_adapter = :sidekiq
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

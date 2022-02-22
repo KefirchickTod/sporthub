@@ -59,6 +59,7 @@ gem "rolify"
 
 # Simple, efficient background processing for Ruby [https://github.com/mperham/sidekiq]
 gem "sidekiq"
+gem "sidekiq-cron"
 
 # Centralization of locale data collection for Ruby on Rails. [https://github.com/svenfuchs/rails-i18n]
 gem "rails-i18n", "~> 7.0.0"
@@ -70,12 +71,15 @@ gem "lokalise_rails"
 # robust and scalable authorization system.
 gem "pundit"
 
-# State Machines adds support for creating state machines for attributes on any Ruby class.[https://github.com/state-machines/state_machines]
-gem "state_machines"
+# This package contains AASM, a library for adding finite state machines to Ruby classes. [https://github.com/aasm/aasm]
+gem "aasm"
 
 # A PDF generation plugin for Ruby on Rails [https://github.com/mileszs/wicked_pdf]
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
+
+# A Ruby client that tries to match Redis' API one-to-one, while still providing an idiomatic interface. [https://rubygems.org/gems/redis/versions/4.5.1]
+# gem "redis", "~> 4.5", ">= 4.5.1"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -107,4 +111,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  # Simple testing of Sidekiq jobs via a collection of matchers and helpers[https://github.com/philostler/rspec-sidekiq]
+  gem "rspec-sidekiq"
 end
+
+gem 'rssfeed', path: 'rssfeed'

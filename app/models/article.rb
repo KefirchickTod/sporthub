@@ -1,8 +1,11 @@
 class Article < ApplicationRecord
   # TODO(subscribes): If user subscribes to team current articles and current article changing status(state) to published, create mail to user
+  # TODO(status): after transaction send mail to successfully moderation  article
+  # TODO(engines): engines must return for read subscribe chanel rss, user mapping for overwrite attr, and render xml
+  #
 
-  # Virtus
-  # include Virtus.model
+  include AASM
+
   attribute :title, :string
   attribute :caption, :string
   attribute :content, :string
@@ -30,6 +33,27 @@ class Article < ApplicationRecord
   #    # Todo send email
   #  end
   # end
+
+  aasm do
+    state :published, initial: true
+    state :closed
+    state :unpublished
+    state :moderating
+
+    event :publishing do
+      transitions from: [:unpublished, :moderating, :closed], to: :published, after: :send_mails
+    end
+
+    event :close do
+      transitions from: :published, to: :closed
+    end
+  end
+
+  # Send mails about published new articles
+  def send_mails
+    Articles::ArticleMailerJob.perform_async(self.class, User.admins.sample, User.find(users_id))
+    Articles::NoticeAboutNewArticle.perform_in(5.minute.from_now, self.class, team.users.pluck(&:email))
+  end
 
   # Singleton
   class << self
