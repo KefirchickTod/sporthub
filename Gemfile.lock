@@ -1,3 +1,9 @@
+PATH
+  remote: rssfeed
+  specs:
+    rssfeed (0.1.0)
+      rails (>= 7.0.2.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -391,6 +397,7 @@ DEPENDENCIES
   rolify
   rspec-rails
   rspec-sidekiq
+  rssfeed!
   sassc-rails
   selenium-webdriver
   sidekiq
