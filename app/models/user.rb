@@ -28,6 +28,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :teams, optional: :destroy
 
   scope :admins, -> { joins(:roles).where("name = 'admin'") }
+  scope :subscribed, -> { where("email is not null") }
 
   # Set user confirm
   def confirm!
@@ -88,7 +89,11 @@ class User < ApplicationRecord
 
   # Check if current user is admin
   def admin?
-    has_role(:admin)
+    has_role?(:admin)
+  end
+
+  def moderator?
+    has_role?(:moderator)
   end
 
   private

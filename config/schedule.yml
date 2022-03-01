@@ -1,4 +1,4 @@
-catfact_mailer_job:
-    cron: "5 7 * * *"
-    class: "ArticleMailerJob"
+article_mailer_job:
+    cron: "5 17 * * *"
+    class: "Articles::EveryDayJob"
     queue: default

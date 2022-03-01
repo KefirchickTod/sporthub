@@ -58,7 +58,7 @@ gem "pagy", "~> 5.10" # omit patch digit
 gem "rolify"
 
 # Simple, efficient background processing for Ruby [https://github.com/mperham/sidekiq]
-gem "sidekiq"
+gem "sidekiq", "~> 6.4.1"
 gem "sidekiq-cron"
 
 # Centralization of locale data collection for Ruby on Rails. [https://github.com/svenfuchs/rails-i18n]
@@ -116,4 +116,4 @@ group :test do
   gem "rspec-sidekiq"
 end
 
-gem 'rssfeed', path: 'rssfeed'
+gem "rssfeed", path: "rssfeed"

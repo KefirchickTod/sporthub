@@ -1,16 +1,11 @@
 module Admin
   class ArticlesController < Admin::AdminController
+    before_action :find_article, only: %i[show edit update delete]
     # include ServiceHandle
 
     # GET /admin/article
     def index
-      @pagy, @articles = pagy(Article.all)
-      respond_to do |format|
-        format.html
-        format.pdf do
-          render pdf: "article"
-        end
-      end
+      @pagy, @articles = pagy(ArticlePolicy::Scope.new(current_user, Article).resolve)
     end
 
     # GET /admin/article/:id
@@ -35,11 +30,12 @@ module Admin
 
     # GET /admin/article/edit
     def edit
-      @article = Article.find(params[:id])
     end
 
     # POST /admin/article
     def update
+      authorize @article, :editable?, policy_class: ArticlePolicy
+
       @article = Articles::Update.new(article_params, params[:id]).call
       redirect_to admin_article_url
     end
@@ -64,6 +60,12 @@ module Admin
         :is_public,
         :show_comment
       )
+    end
+
+    # Find article by outer id
+    # @return[Article]
+    def find_article
+      @article = Article.find(params[:id])
     end
   end
 end

@@ -21,12 +21,12 @@ class Article < ApplicationRecord
   has_one_attached :image, dependent: :destroy
 
   # Validate
-  validates :title, presence: true, uniqueness: {scope: :title, massage: "For each article have to unique title"}
+  validates :title, presence: true, uniqueness: { scope: :title, massage: "For each article have to unique title" }
   validates :content, presence: true
   validates :users_id, presence: true
   validates :categories_id, presence: true
 
-  scope :all_public, -> { where("is_public = 1") }
+  scope :all_public, -> { where("is_public = 1 OR aasm_state = 'published'") }
 
   # state_machine :is_public, initial: :published do
   #  event :published do
